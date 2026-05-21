@@ -7,6 +7,7 @@
 		<EnableWindowsTargeting>true</EnableWindowsTargeting>
 
 		<IsTrimmable>false</IsTrimmable>
+		<Version>1.0.10.3</Version>
 		<!-- AOT / Trimming compatibility for iOS consumers -->
 		<!--<IsAotCompatible>true</IsAotCompatible>
 		<EnableAotAnalyzer>true</EnableAotAnalyzer>
