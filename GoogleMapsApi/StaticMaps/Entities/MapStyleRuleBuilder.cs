@@ -1,5 +1,5 @@
-using System;
 using GoogleMapsApi.StaticMaps.Enums;
+using System;
 
 namespace GoogleMapsApi.StaticMaps.Entities
 {

@@ -1,5 +1,5 @@
-using System.Text.Json;
-using GoogleMapsApi.Engine.JsonConverters;
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using Newtonsoft.Json;
 
 namespace GoogleMapsApi.Engine
 {
@@ -13,24 +13,13 @@ namespace GoogleMapsApi.Engine
         /// Creates a configured JsonSerializerOptions instance with all necessary converters
         /// for Google Maps API entities.
         /// </summary>
-        /// <returns>Configured JsonSerializerOptions instance</returns>
-        public static JsonSerializerOptions CreateOptions()
+        /// <returns>Configured JsonSerializerSettings instance</returns>
+        public static JsonSerializerSettings CreateOptions()
         {
-            var options = new JsonSerializerOptions
+            var options = new JsonSerializerSettings
             {
-                PropertyNameCaseInsensitive = true
+                NullValueHandling = NullValueHandling.Ignore,
             };
-
-            // Add EnumMemberJsonConverter for all enums with proper EnumMember attribute support
-            options.Converters.Add(new EnumMemberJsonConverterFactory());
-            
-            // Add custom converters
-            options.Converters.Add(new PriceLevelJsonConverter());
-            options.Converters.Add(new OverviewPolylineJsonConverter());
-            
-            // Add Duration converters for specific types
-            options.Converters.Add(new DurationJsonConverter<GoogleMapsApi.Entities.DistanceMatrix.Response.Duration>());
-            options.Converters.Add(new DurationJsonConverter<GoogleMapsApi.Entities.Directions.Response.Duration>());
 
             return options;
         }

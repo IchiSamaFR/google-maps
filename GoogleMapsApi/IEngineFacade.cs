@@ -9,7 +9,7 @@ namespace GoogleMapsApi
 
     public interface IEngineFacade<in TRequest, TResponse>
         where TRequest : MapsBaseRequest, new()
-        where TResponse : IResponseFor<TRequest>
+        where TResponse : class, IResponseFor<TRequest>
     {
         /// <summary>
         /// Occurs when the Url created. Can be used for override the Url.

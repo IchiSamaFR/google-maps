@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesFind.Response
 {
@@ -12,7 +8,7 @@ namespace GoogleMapsApi.Entities.PlacesFind.Response
         /// <summary>
         ///  is a boolean value indicating if the Place is open at the current time.
         /// </summary>
-        [JsonPropertyName("open_now")]
+        [JsonProperty("open_now")]
         public bool OpenNow { get; set; }
     }
 }

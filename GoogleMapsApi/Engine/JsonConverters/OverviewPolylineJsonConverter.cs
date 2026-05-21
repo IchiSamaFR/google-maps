@@ -1,64 +1,53 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using GoogleMapsApi.Entities.Directions.Response;
+using Newtonsoft.Json;
+using System;
+using System.Reflection;
 
 namespace GoogleMapsApi.Engine.JsonConverters
 {
-    /// <summary>
-    /// JSON converter for OverviewPolyline that handles encoded points and lazy initialization
-    /// </summary>
-    public class OverviewPolylineJsonConverter : JsonConverter<OverviewPolyline>
+    public class OverviewPolylineJsonConverter : JsonConverter
     {
-        public override OverviewPolyline Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override bool CanConvert(Type objectType) => typeof(OverviewPolyline).IsAssignableFrom(objectType);
+
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType != JsonTokenType.StartObject)
-                throw new JsonException($"Expected StartObject, got {reader.TokenType}");
+            if (reader.TokenType != JsonToken.StartObject)
+                throw new JsonSerializationException($"Expected StartObject, got {reader.TokenType}");
 
             var polyline = new OverviewPolyline();
-            var encodedPointsProperty = typeToConvert.GetProperty("EncodedPoints", 
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var encodedPointsProperty = typeof(OverviewPolyline).GetProperty("EncodedPoints", BindingFlags.NonPublic | BindingFlags.Instance);
 
             while (reader.Read())
             {
-                if (reader.TokenType == JsonTokenType.EndObject)
-                    break;
+                if (reader.TokenType == JsonToken.EndObject) break;
 
-                if (reader.TokenType == JsonTokenType.PropertyName)
+                if (reader.TokenType == JsonToken.PropertyName)
                 {
-                    var propertyName = reader.GetString();
+                    var propertyName = (string)reader.Value!;
                     reader.Read();
 
-                    if (propertyName == "points" && reader.TokenType == JsonTokenType.String)
-                    {
-                        var encodedPoints = reader.GetString();
-                        encodedPointsProperty?.SetValue(polyline, encodedPoints);
-                    }
+                    if (propertyName == "points" && reader.TokenType == JsonToken.String)
+                        encodedPointsProperty?.SetValue(polyline, (string?)reader.Value);
                 }
             }
 
-            // Initialize lazy points after deserialization
             polyline.OnDeserialized();
             return polyline;
         }
 
-        public override void Write(Utf8JsonWriter writer, OverviewPolyline value, JsonSerializerOptions options)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
-            if (value == null)
-            {
-                writer.WriteNullValue();
-                return;
-            }
+            if (value == null) { writer.WriteNull(); return; }
 
             writer.WriteStartObject();
 
-            var encodedPointsProperty = typeof(OverviewPolyline).GetProperty("EncodedPoints",
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            
+            var encodedPointsProperty = typeof(OverviewPolyline).GetProperty("EncodedPoints", BindingFlags.NonPublic | BindingFlags.Instance);
             var encodedPoints = (string?)encodedPointsProperty?.GetValue(value);
+
             if (encodedPoints != null)
             {
-                writer.WriteString("points", encodedPoints);
+                writer.WritePropertyName("points");
+                writer.WriteValue(encodedPoints);
             }
 
             writer.WriteEndObject();

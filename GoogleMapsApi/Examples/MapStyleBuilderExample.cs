@@ -1,9 +1,8 @@
-using System;
-using System.Collections.Generic;
+using GoogleMapsApi.Entities.Common;
 using GoogleMapsApi.StaticMaps;
 using GoogleMapsApi.StaticMaps.Entities;
 using GoogleMapsApi.StaticMaps.Enums;
-using GoogleMapsApi.Entities.Common;
+using System;
 
 namespace GoogleMapsApi.Examples
 {

@@ -1,57 +1,55 @@
+using GoogleMapsApi.Entities.PlacesDetails.Response;
+using Newtonsoft.Json;
 using System;
 using System.Globalization;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using GoogleMapsApi.Entities.PlacesDetails.Response;
 
 namespace GoogleMapsApi.Engine.JsonConverters
 {
     /// <summary>
-    /// JSON converter for PriceLevel enum that handles string number conversion
+    /// JSON converter for PriceLevel enum that handles string number conversion (Newtonsoft version)
     /// </summary>
     public class PriceLevelJsonConverter : JsonConverter<PriceLevel?>
     {
-        public override PriceLevel? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override PriceLevel? ReadJson(JsonReader reader, Type objectType, PriceLevel? existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonTokenType.Null)
+            if (reader.TokenType == JsonToken.Null)
                 return null;
 
-            if (reader.TokenType == JsonTokenType.String)
+            if (reader.TokenType == JsonToken.String)
             {
-                var stringValue = reader.GetString();
+                var stringValue = (string?)reader.Value;
                 if (string.IsNullOrEmpty(stringValue))
                     return null;
 
                 if (int.TryParse(stringValue, out var priceLevelInt) && Enum.IsDefined(typeof(PriceLevel), priceLevelInt))
                     return (PriceLevel)priceLevelInt;
             }
-            else if (reader.TokenType == JsonTokenType.Number)
+            else if (reader.TokenType == JsonToken.Integer)
             {
-                if (reader.TryGetInt32(out var intValue) && Enum.IsDefined(typeof(PriceLevel), intValue))
-                {
+                var intValue = Convert.ToInt32(reader.Value, CultureInfo.InvariantCulture);
+                if (Enum.IsDefined(typeof(PriceLevel), intValue))
                     return (PriceLevel)intValue;
-                }
-                else if (reader.TryGetDouble(out var doubleValue))
-                {
-                    // Convert floating point to integer (truncate decimal part)
-                    var truncatedValue = (int)doubleValue;
-                    if (Enum.IsDefined(typeof(PriceLevel), truncatedValue))
-                        return (PriceLevel)truncatedValue;
-                }
+            }
+            else if (reader.TokenType == JsonToken.Float)
+            {
+                var doubleValue = Convert.ToDouble(reader.Value, CultureInfo.InvariantCulture);
+                var truncatedValue = (int)doubleValue;
+                if (Enum.IsDefined(typeof(PriceLevel), truncatedValue))
+                    return (PriceLevel)truncatedValue;
             }
 
             return null;
         }
 
-        public override void Write(Utf8JsonWriter writer, PriceLevel? value, JsonSerializerOptions options)
+        public override void WriteJson(JsonWriter writer, PriceLevel? value, JsonSerializer serializer)
         {
             if (value.HasValue)
             {
-                writer.WriteStringValue(((int)value.Value).ToString(CultureInfo.InvariantCulture));
+                writer.WriteValue(((int)value.Value).ToString(CultureInfo.InvariantCulture));
             }
             else
             {
-                writer.WriteNullValue();
+                writer.WriteNull();
             }
         }
     }

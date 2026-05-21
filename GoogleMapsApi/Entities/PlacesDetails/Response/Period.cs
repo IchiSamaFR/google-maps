@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesDetails.Response
 {
@@ -11,10 +12,10 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Response
     /// </summary>
     public class Period
     {
-        [JsonPropertyName("open")]
+        [JsonProperty("open")]
         public TimeOfWeek OpenTime { get; set; } = null!;
 
-        [JsonPropertyName("close")]
+        [JsonProperty("close")]
         public TimeOfWeek CloseTime { get; set; } = null!;
     }
 }

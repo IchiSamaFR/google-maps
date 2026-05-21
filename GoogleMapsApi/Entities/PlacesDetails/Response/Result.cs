@@ -1,10 +1,10 @@
-﻿using System;
-using System.Globalization;
-using System.Text.Json.Serialization;
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using GoogleMapsApi.Entities.Common;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoogleMapsApi.Entities.Common;
-using GoogleMapsApi.Engine.JsonConverters;
 
 namespace GoogleMapsApi.Entities.PlacesDetails.Response
 {
@@ -13,210 +13,210 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Response
         /// <summary>
         /// name contains the human-readable name for the returned result. For establishment results, this is usually the canonicalized business name.
         /// </summary>
-    
+
         /// <summary>
         /// address_components is an array containing the separate address components.
         /// Use the helper methods on this Result class to easily extract street address, state, postal code, etc.
         /// Example: result.GetStreetAddress(), result.GetState(), result.GetPostalCode()
         /// </summary>
-        [JsonPropertyName("address_components")]
+        [JsonProperty("address_components")]
         public IEnumerable<GoogleMapsApi.Entities.Geocoding.Response.AddressComponent>? AddressComponent { get; set; }
 
         /// <summary>
         /// A representation of the place's address in the adr microformat.
         /// </summary>
-        [JsonPropertyName("adr_address")]
+        [JsonProperty("adr_address")]
         public string AdrAddress { get; set; } = null!;
 
         /// <summary>
         /// Indicates the operational status of the place, if it is a business.
         /// </summary>
-        [JsonPropertyName("business_status")]
+        [JsonProperty("business_status")]
         [JsonConverter(typeof(EnumMemberJsonConverter<BusinessStatus>))]
         public BusinessStatus? BusinessStatus { get; set; }
 
         /// <summary>
         /// Specifies if the business supports curbside pickup.
         /// </summary>
-        [JsonPropertyName("curbside_pickup")]
+        [JsonProperty("curbside_pickup")]
         public bool? CurbsidePickup { get; set; }
 
         /// <summary>
         /// Contains the hours of operation for the next seven days (including today).
         /// </summary>
-        [JsonPropertyName("current_opening_hours")]
+        [JsonProperty("current_opening_hours")]
         public OpeningHours CurrentOpeningHours { get; set; } = null!;
 
         /// <summary>
         /// Specifies if the business supports delivery.
         /// </summary>
-        [JsonPropertyName("delivery")]
+        [JsonProperty("delivery")]
         public bool? Delivery { get; set; }
 
         /// <summary>
         /// Specifies if the business supports indoor or outdoor seating options.
         /// </summary>
-        [JsonPropertyName("dine_in")]
+        [JsonProperty("dine_in")]
         public bool? DineIn { get; set; }
 
         /// <summary>
         /// Contains a summary of the place.
         /// </summary>
-        [JsonPropertyName("editorial_summary")]
+        [JsonProperty("editorial_summary")]
         public PlaceEditorialSummary EditorialSummary { get; set; } = null!;
 
 
-        [JsonPropertyName("events")]
+        [JsonProperty("events")]
         public IEnumerable<Event> Event { get; set; } = null!;
 
-        [JsonPropertyName("formatted_address")]
+        [JsonProperty("formatted_address")]
         public string FormattedAddress { get; set; } = null!;
 
-        [JsonPropertyName("formatted_phone_number")]
+        [JsonProperty("formatted_phone_number")]
         public string FormattedPhoneNumber { get; set; } = null!;
 
-        [JsonPropertyName("geometry")]
+        [JsonProperty("geometry")]
         public Geometry Geometry { get; set; } = null!;
 
-        [JsonPropertyName("icon")]
+        [JsonProperty("icon")]
         public string Icon { get; set; } = null!;
 
         /// <summary>
         /// Contains the default HEX color code for the place's category.
         /// </summary>
-        [JsonPropertyName("icon_background_color")]
+        [JsonProperty("icon_background_color")]
         public string IconBackgroundColor { get; set; } = null!;
 
         /// <summary>
         /// Contains the URL of a recommended icon, minus the .svg or .png file type extension.
         /// </summary>
-        [JsonPropertyName("icon_mask_base_uri")]
+        [JsonProperty("icon_mask_base_uri")]
         public string IconMaskBaseUri { get; set; } = null!;
 
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public string ID { get; set; } = null!;
 
-        [JsonPropertyName("international_phone_number")]
+        [JsonProperty("international_phone_number")]
         public string InternationalPhoneNumber { get; set; } = null!;
 
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public string Name { get; set; } = null!;
 
         /// <summary>
         /// Opening hours information
         /// </summary>
-        [JsonPropertyName("opening_hours")]
+        [JsonProperty("opening_hours")]
         public OpeningHours OpeningHours { get; set; } = null!;
 
-        [JsonPropertyName("permanently_closed")]
+        [JsonProperty("permanently_closed")]
         [Obsolete("Use BusinessStatus property instead. See https://developers.google.com/maps/documentation/places/web-service/details#fields for more information.")]
         public bool PermanentlyClosed { get; set; }
 
         /// <summary>
         /// An encoded location reference, derived from latitude and longitude coordinates.
         /// </summary>
-        [JsonPropertyName("plus_code")]
+        [JsonProperty("plus_code")]
         public PlusCode PlusCode { get; set; } = null!;
 
-        [JsonPropertyName("photos")]
+        [JsonProperty("photos")]
         public IEnumerable<Photo> Photos { get; set; } = null!;
 
-        [JsonPropertyName("price_level")]
+        [JsonProperty("price_level")]
         [JsonConverter(typeof(GoogleMapsApi.Engine.JsonConverters.PriceLevelJsonConverter))]
         public PriceLevel? PriceLevel { get; set; }
 
-        [JsonPropertyName("rating")]
+        [JsonProperty("rating")]
         public double Rating { get; set; }
 
-        [JsonPropertyName("reference")]
+        [JsonProperty("reference")]
         [Obsolete("Use place_id instead.  See https://developers.google.com/places/documentation/search#deprecation for more information.")]
         public string Reference { get; set; } = null!;
 
-        [JsonPropertyName("reviews")]
+        [JsonProperty("reviews")]
         public IEnumerable<Review> Review { get; set; } = null!;
 
         /// <summary>
         /// Contains an array of entries for the next seven days including information about secondary hours of a business.
         /// </summary>
-        [JsonPropertyName("secondary_opening_hours")]
+        [JsonProperty("secondary_opening_hours")]
         public IEnumerable<OpeningHours> SecondaryOpeningHours { get; set; } = null!;
 
         /// <summary>
         /// Specifies if the place serves beer.
         /// </summary>
-        [JsonPropertyName("serves_beer")]
+        [JsonProperty("serves_beer")]
         public bool? ServesBeer { get; set; }
 
         /// <summary>
         /// Specifies if the place serves breakfast.
         /// </summary>
-        [JsonPropertyName("serves_breakfast")]
+        [JsonProperty("serves_breakfast")]
         public bool? ServesBreakfast { get; set; }
 
         /// <summary>
         /// Specifies if the place serves brunch.
         /// </summary>
-        [JsonPropertyName("serves_brunch")]
+        [JsonProperty("serves_brunch")]
         public bool? ServesBrunch { get; set; }
 
         /// <summary>
         /// Specifies if the place serves dinner.
         /// </summary>
-        [JsonPropertyName("serves_dinner")]
+        [JsonProperty("serves_dinner")]
         public bool? ServesDinner { get; set; }
 
         /// <summary>
         /// Specifies if the place serves lunch.
         /// </summary>
-        [JsonPropertyName("serves_lunch")]
+        [JsonProperty("serves_lunch")]
         public bool? ServesLunch { get; set; }
 
         /// <summary>
         /// Specifies if the place serves vegetarian food.
         /// </summary>
-        [JsonPropertyName("serves_vegetarian_food")]
+        [JsonProperty("serves_vegetarian_food")]
         public bool? ServesVegetarianFood { get; set; }
 
         /// <summary>
         /// Specifies if the place serves wine.
         /// </summary>
-        [JsonPropertyName("serves_wine")]
+        [JsonProperty("serves_wine")]
         public bool? ServesWine { get; set; }
 
         /// <summary>
         /// Specifies if the business supports takeout.
         /// </summary>
-        [JsonPropertyName("takeout")]
+        [JsonProperty("takeout")]
         public bool? Takeout { get; set; }
 
-        [JsonPropertyName("types")]
+        [JsonProperty("types")]
         public string[] Types { get; set; } = null!;
 
-        [JsonPropertyName("url")]
+        [JsonProperty("url")]
         public string URL { get; set; } = null!;
 
         /// <summary>
         /// The total number of reviews, with or without text, for this place.
         /// </summary>
-        [JsonPropertyName("user_ratings_total")]
+        [JsonProperty("user_ratings_total")]
         public int? UserRatingsTotal { get; set; }
 
-        [JsonPropertyName("utc_offset")]
+        [JsonProperty("utc_offset")]
         public int? UTCOffset { get; set; }
 
-        [JsonPropertyName("vicinity")]
+        [JsonProperty("vicinity")]
         public string Vicinity { get; set; } = null!;
 
-        [JsonPropertyName("website")]
+        [JsonProperty("website")]
         public string Website { get; set; } = null!;
 
         /// <summary>
         /// Specifies if the place has an entrance that is wheelchair-accessible.
         /// </summary>
-        [JsonPropertyName("wheelchair_accessible_entrance")]
+        [JsonProperty("wheelchair_accessible_entrance")]
         public bool? WheelchairAccessibleEntrance { get; set; }
 
-        [JsonPropertyName("place_id")]
+        [JsonProperty("place_id")]
         public string PlaceId { get; set; } = null!;
 
         #region Address Component Helper Methods
@@ -282,9 +282,9 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Response
                 return null;
 
             // Try locality first, then sublocality
-            var component = GetAddressComponentByType("locality") 
+            var component = GetAddressComponentByType("locality")
                           ?? GetAddressComponentByType("sublocality");
-            
+
             return component == null ? null : (useShortName ? component.ShortName : component.LongName);
         }
 

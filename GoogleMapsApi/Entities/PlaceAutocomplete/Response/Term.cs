@@ -1,5 +1,5 @@
-﻿using System.Text.Json.Serialization;
-using GoogleMapsApi.Entities.Common;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlaceAutocomplete.Response
 {
@@ -11,13 +11,13 @@ namespace GoogleMapsApi.Entities.PlaceAutocomplete.Response
         /// <summary>
         /// The text of the term
         /// </summary>
-        [JsonPropertyName("value")]
+        [JsonProperty("value")]
         public string Value { get; set; } = null!;
 
         /// <summary>
         /// The start position of this term in the description, measured in Unicode characters
         /// </summary>
-        [JsonPropertyName("offset")]
+        [JsonProperty("offset")]
         public int Offset { get; set; }
     }
 }

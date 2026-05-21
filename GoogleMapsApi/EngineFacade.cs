@@ -13,7 +13,7 @@ namespace GoogleMapsApi
     /// <typeparam name="TResponse"></typeparam>
     public class EngineFacade<TRequest, TResponse> : IEngineFacade<TRequest, TResponse>
         where TRequest : MapsBaseRequest, new()
-        where TResponse : IResponseFor<TRequest>
+        where TResponse : class, IResponseFor<TRequest>
     {
         internal static readonly EngineFacade<TRequest, TResponse> Instance = new();
 

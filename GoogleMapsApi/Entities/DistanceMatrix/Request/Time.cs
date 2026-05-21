@@ -1,10 +1,9 @@
 ﻿
 namespace GoogleMapsApi.Entities.DistanceMatrix.Request
 {
+    using GoogleMapsApi.Engine;
     using System;
     using System.Globalization;
-
-    using GoogleMapsApi.Engine;
 
     public class Time
     {
