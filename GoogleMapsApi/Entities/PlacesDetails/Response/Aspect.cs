@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesDetails.Response
 {
@@ -8,10 +8,10 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Response
         /// <summary>
         /// Event id.
         /// </summary>
-        [JsonProperty("rating")]
+        [JsonPropertyName("rating")]
         public int Rating { get; set; }
 
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; } = null!;
 
     }

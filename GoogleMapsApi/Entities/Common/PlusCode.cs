@@ -1,5 +1,5 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Common
 {
@@ -14,14 +14,14 @@ namespace GoogleMapsApi.Entities.Common
         /// <summary>
         /// A 4 character area code and 6 character or longer local code (849VCWC8+R9).
         /// </summary>
-        [JsonProperty("global_code")]
+        [JsonPropertyName("global_code")]
         public string GlobalCode { get; set; } = null!;
 
         /// <summary>
         /// A 6 character or longer local code with an explicit location (CWC8+R9, Mountain View, CA, USA).
         /// May return an empty string if the compound_code is not available.
         /// </summary>
-        [JsonProperty("compound_code")]
+        [JsonPropertyName("compound_code")]
         public string CompoundCode { get; set; } = null!;
     }
 }

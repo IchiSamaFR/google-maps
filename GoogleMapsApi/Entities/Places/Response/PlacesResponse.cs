@@ -1,8 +1,8 @@
 ﻿using GoogleMapsApi.Engine.JsonConverters;
 using GoogleMapsApi.Entities.Common;
 using GoogleMapsApi.Entities.Places.Request;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace GoogleMapsApi.Entities.Places.Response
@@ -12,7 +12,7 @@ namespace GoogleMapsApi.Entities.Places.Response
         /// <summary>
         /// "status" contains metadata on the request.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         [JsonConverter(typeof(EnumMemberJsonConverter<StatusCodes>))]
         public StatusCodes Status { get; set; }
 
@@ -20,13 +20,13 @@ namespace GoogleMapsApi.Entities.Places.Response
         /// If there is a next page of results, the token will be supplied by Google. Token should be set on the next PlacesRequest object to get the next page of results from Google.
         /// If null is returned, there is no next page of results.
         /// </summary>
-        [JsonProperty("next_page_token")]
+        [JsonPropertyName("next_page_token")]
         public string NextPage { get; set; } = null!;
 
         /// <summary>
         /// "results" contains an array of places, with information about the place. See Place Search Results for information about these results. The Places API returns up to 20 establishment results. Additionally, political results may be returned which serve to identify the area of the request.
         /// </summary>
-        [JsonProperty("results")]
-        public IEnumerable<Result>? Results { get; set; }
+        [JsonPropertyName("results")]
+        public IEnumerable<PlacesResult>? Results { get; set; }
     }
 }

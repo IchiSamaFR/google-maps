@@ -1,6 +1,6 @@
 using GoogleMapsApi.Entities.Common;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -14,7 +14,7 @@ namespace GoogleMapsApi.Entities.Directions.Response
         /// <summary>
         /// The encoded string containing the overview path points as they were received.
         /// </summary>
-        [JsonProperty("points")]
+        [JsonPropertyName("points")]
         internal string? EncodedPoints { get; set; }
 
         private Lazy<IEnumerable<Location>> pointsLazy = null!;

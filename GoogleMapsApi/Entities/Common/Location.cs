@@ -1,15 +1,15 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Globalization;
 
 namespace GoogleMapsApi.Entities.Common
 {
     public class Location : ILocationString
     {
-        [JsonProperty("lat")]
+        [JsonPropertyName("lat")]
         public double Latitude { get; set; }
 
-        [JsonProperty("lng")]
+        [JsonPropertyName("lng")]
         public double Longitude { get; set; }
 
         public Location()

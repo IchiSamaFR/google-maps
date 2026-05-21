@@ -1,7 +1,7 @@
 ﻿using GoogleMapsApi.Engine.JsonConverters;
 using GoogleMapsApi.Entities.Common;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace GoogleMapsApi.Entities.Directions.Response
@@ -14,65 +14,65 @@ namespace GoogleMapsApi.Entities.Directions.Response
         /// <summary>
         /// steps[] contains an array of steps denoting information about each separate step of the leg of the journey. (See Directions Steps below.)
         /// </summary>
-        [JsonProperty("steps")]
+        [JsonPropertyName("steps")]
         public IEnumerable<Step>? Steps { get; set; }
 
         /// <summary>
         /// distance indicates the total distance covered by this leg
         /// </summary>
-        [JsonProperty("distance")]
+        [JsonPropertyName("distance")]
         public Distance? Distance { get; set; }
 
         /// <summary>
         /// duration indicates the total duration of this leg,
         /// </summary>
-        [JsonProperty("duration")]
+        [JsonPropertyName("duration")]
         [JsonConverter(typeof(DurationJsonConverter<Duration>))]
         public Duration? Duration { get; set; }
 
         /// <summary>
         /// duration_in_traffic indicates the total duration of this leg. This value is an estimate of the time in traffic based on current and historical traffic conditions.
         /// </summary>
-        [JsonProperty("duration_in_traffic")]
+        [JsonPropertyName("duration_in_traffic")]
         [JsonConverter(typeof(DurationJsonConverter<Duration>))]
         public Duration? DurationInTraffic { get; set; }
 
         /// <summary>
         /// start_location contains the latitude/longitude coordinates of the origin of this leg. Because the Directions API calculates directions between locations by using the nearest transportation option (usually a road) at the start and end points, start_location may be different than the provided origin of this leg if, for example, a road is not near the origin.
         /// </summary>
-        [JsonProperty("start_location")]
+        [JsonPropertyName("start_location")]
         [JsonConverter(typeof(DurationJsonConverter<Duration>))]
         public Location? StartLocation { get; set; }
 
         /// <summary>
         /// end_location contains the latitude/longitude coordinates of the given destination of this leg. Because the Directions API calculates directions between locations by using the nearest transportation option (usually a road) at the start and end points, end_location may be different than the provided destination of this leg if, for example, a road is not near the destination.
         /// </summary>
-        [JsonProperty("end_location")]
+        [JsonPropertyName("end_location")]
         public Location? EndLocation { get; set; }
 
         /// <summary>
         /// start_address contains the human-readable address (typically a street address) reflecting the start_location of this leg.
         /// </summary>
-        [JsonProperty("start_address")]
+        [JsonPropertyName("start_address")]
         public string? StartAddress { get; set; }
 
         /// <summary>
         /// end_addresss contains the human-readable address (typically a street address) reflecting the end_location of this leg.
         /// </summary>
-        [JsonProperty("end_address")]
+        [JsonPropertyName("end_address")]
         public string? EndAddress { get; set; }
 
         /// <summary>
         /// The time of arrival. Only avaliable when using TravelMode = Transit
         /// </summary>
-        [JsonProperty("arrival_time")]
+        [JsonPropertyName("arrival_time")]
         [JsonConverter(typeof(DurationJsonConverter<Duration>))]
         public Duration? ArrivalTime { get; set; }
 
         /// <summary>
         /// The time of departure. Only avaliable when using TravelMode = Transit
         /// </summary>
-        [JsonProperty("departure_time")]
+        [JsonPropertyName("departure_time")]
         [JsonConverter(typeof(DurationJsonConverter<Duration>))]
         public Duration? DepartureTime { get; set; }
     }

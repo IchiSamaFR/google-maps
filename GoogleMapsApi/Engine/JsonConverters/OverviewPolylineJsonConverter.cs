@@ -1,53 +1,64 @@
-using GoogleMapsApi.Entities.Directions.Response;
-using Newtonsoft.Json;
 using System;
-using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using GoogleMapsApi.Entities.Directions.Response;
 
 namespace GoogleMapsApi.Engine.JsonConverters
 {
-    public class OverviewPolylineJsonConverter : JsonConverter
+    /// <summary>
+    /// JSON converter for OverviewPolyline that handles encoded points and lazy initialization
+    /// </summary>
+    public class OverviewPolylineJsonConverter : JsonConverter<OverviewPolyline>
     {
-        public override bool CanConvert(Type objectType) => typeof(OverviewPolyline).IsAssignableFrom(objectType);
-
-        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        public override OverviewPolyline Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (reader.TokenType != JsonToken.StartObject)
-                throw new JsonSerializationException($"Expected StartObject, got {reader.TokenType}");
+            if (reader.TokenType != JsonTokenType.StartObject)
+                throw new JsonException($"Expected StartObject, got {reader.TokenType}");
 
             var polyline = new OverviewPolyline();
-            var encodedPointsProperty = typeof(OverviewPolyline).GetProperty("EncodedPoints", BindingFlags.NonPublic | BindingFlags.Instance);
+            var encodedPointsProperty = typeToConvert.GetProperty("EncodedPoints",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
             while (reader.Read())
             {
-                if (reader.TokenType == JsonToken.EndObject) break;
+                if (reader.TokenType == JsonTokenType.EndObject)
+                    break;
 
-                if (reader.TokenType == JsonToken.PropertyName)
+                if (reader.TokenType == JsonTokenType.PropertyName)
                 {
-                    var propertyName = (string)reader.Value!;
+                    var propertyName = reader.GetString();
                     reader.Read();
 
-                    if (propertyName == "points" && reader.TokenType == JsonToken.String)
-                        encodedPointsProperty?.SetValue(polyline, (string?)reader.Value);
+                    if (propertyName == "points" && reader.TokenType == JsonTokenType.String)
+                    {
+                        var encodedPoints = reader.GetString();
+                        encodedPointsProperty?.SetValue(polyline, encodedPoints);
+                    }
                 }
             }
 
+            // Initialize lazy points after deserialization
             polyline.OnDeserialized();
             return polyline;
         }
 
-        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, OverviewPolyline value, JsonSerializerOptions options)
         {
-            if (value == null) { writer.WriteNull(); return; }
+            if (value == null)
+            {
+                writer.WriteNullValue();
+                return;
+            }
 
             writer.WriteStartObject();
 
-            var encodedPointsProperty = typeof(OverviewPolyline).GetProperty("EncodedPoints", BindingFlags.NonPublic | BindingFlags.Instance);
-            var encodedPoints = (string?)encodedPointsProperty?.GetValue(value);
+            var encodedPointsProperty = typeof(OverviewPolyline).GetProperty("EncodedPoints",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
+            var encodedPoints = (string?)encodedPointsProperty?.GetValue(value);
             if (encodedPoints != null)
             {
-                writer.WritePropertyName("points");
-                writer.WriteValue(encodedPoints);
+                writer.WriteString("points", encodedPoints);
             }
 
             writer.WriteEndObject();

@@ -1,8 +1,8 @@
 ﻿using GoogleMapsApi.Engine.JsonConverters;
 using GoogleMapsApi.Entities.Common;
 using GoogleMapsApi.Entities.PlacesDetails.Request;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesDetails.Response
 {
@@ -11,7 +11,7 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Response
         /// <summary>
         /// "status" contains metadata on the request.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         [JsonConverter(typeof(EnumMemberJsonConverter<StatusCodes>))]
         public StatusCodes Status { get; set; }
 
@@ -20,7 +20,7 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Response
         /// <summary>
         /// "results" contains an array of places, with information about the place. See Place Search Results for information about these results. The Places API returns up to 20 establishment results. Additionally, political results may be returned which serve to identify the area of the request.
         /// </summary>
-        [JsonProperty("result")]
-        public Result Result { get; set; } = null!;
+        [JsonPropertyName("result")]
+        public PlacesDetailsResult Result { get; set; } = null!;
     }
 }

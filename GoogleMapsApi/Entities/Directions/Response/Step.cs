@@ -1,8 +1,8 @@
 ﻿using GoogleMapsApi.Engine.JsonConverters;
 using GoogleMapsApi.Entities.Common;
 using GoogleMapsApi.Entities.Directions.Request;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace GoogleMapsApi.Entities.Directions.Response
@@ -15,64 +15,64 @@ namespace GoogleMapsApi.Entities.Directions.Response
         /// <summary>
         /// html_instructions contains formatted instructions for this step, presented as an HTML text string.
         /// </summary>
-        [JsonProperty("html_instructions")]
+        [JsonPropertyName("html_instructions")]
         public string? HtmlInstructions { get; set; }
 
         /// <summary>
         /// Contains an object holding an array of encoded points that represent an approximate (smoothed) path of the resulting directions.
         /// </summary>
-        [JsonProperty("polyline")]
+        [JsonPropertyName("polyline")]
         public OverviewPolyline? PolyLine { get; set; }
 
         /// <summary>
         /// distance contains the distance covered by this step until the next step. (See the discussion of this field in Directions Legs above.) This field may be undefined if the distance is unknown.
         /// </summary>
-        [JsonProperty("distance")]
+        [JsonPropertyName("distance")]
         public Distance? Distance { get; set; }
 
         /// <summary>
         /// duration contains the typical time required to perform the step, until the next step (See the description in Directions Legs above.) This field may be undefined if the duration is unknown.
         /// </summary>
-        [JsonProperty("duration")]
+        [JsonPropertyName("duration")]
         [JsonConverter(typeof(DurationJsonConverter<Duration>))]
         public Duration? Duration { get; set; }
 
         /// <summary>
         /// start_location contains the location of the starting point of this step, as a single set of lat and lng fields.
         /// </summary>
-        [JsonProperty("start_location")]
+        [JsonPropertyName("start_location")]
         public Location? StartLocation { get; set; }
 
         /// <summary>
         /// end_location contains the location of the starting point of this step, as a single set of lat and lng fields.
         /// </summary>
-        [JsonProperty("end_location")]
+        [JsonPropertyName("end_location")]
         public Location? EndLocation { get; set; }
 
         /// <summary>
         /// More information about the step. Only avaliable when TravelMode = Transit
         /// </summary>
-        [JsonProperty("transit_details")]
+        [JsonPropertyName("transit_details")]
         public TransitDetails? TransitDetails { get; set; }
 
         /// <summary>
         /// Contains detailed directions for walking or driving steps in transit directions. Substeps are only available when TravelMode is set to Transit.
         /// * NOTE : Google documentations states that it should be 'sub_steps' but implemented as 'steps' so we use the actual implementation
         /// </summary>
-        [JsonProperty("steps")]
+        [JsonPropertyName("steps")]
         public IEnumerable<Step>? SubSteps { get; set; }
 
         /// <summary>
         /// Gets the mode of transportation used in this step
         /// </summary>
-        [JsonProperty("travel_mode")]
+        [JsonPropertyName("travel_mode")]
         [JsonConverter(typeof(EnumMemberJsonConverter<TravelMode>))]
         public TravelMode TravelMode { get; set; }
 
         /// <summary>
         /// Gets the action to take for the current step (turn left, merge, straight, etc.) - Values in this list are subject to change. See documentation.
         /// </summary>
-        [JsonProperty("maneuver")]
+        [JsonPropertyName("maneuver")]
         public string? Maneuver { get; set; }
     }
 }

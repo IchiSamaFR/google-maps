@@ -1,49 +1,127 @@
-using Newtonsoft.Json;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Engine.JsonConverters
 {
-    public class EnumMemberJsonConverter<TEnum> : JsonConverter where TEnum : struct, Enum
+    /// <summary>
+    /// JSON converter for enums that respects EnumMember attributes with custom values
+    /// </summary>
+    public class EnumMemberJsonConverter<TEnum> : JsonConverter<TEnum> where TEnum : struct, Enum
     {
-        public override bool CanConvert(Type objectType) => objectType.IsEnum || (Nullable.GetUnderlyingType(objectType)?.IsEnum ?? false);
+        private static readonly ConcurrentDictionary<Type, Dictionary<TEnum, string>> EnumToStringCache
+            = new ConcurrentDictionary<Type, Dictionary<TEnum, string>>();
 
-        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        private static readonly ConcurrentDictionary<Type, Dictionary<string, TEnum>> StringToEnumCache
+            = new ConcurrentDictionary<Type, Dictionary<string, TEnum>>();
+
+        public override TEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (reader.TokenType == JsonToken.String)
+            if (reader.TokenType == JsonTokenType.String)
             {
-                var s = (string?)reader.Value ?? throw new JsonSerializationException($"Unable to convert null string to {objectType.Name}");
+                var stringValue = reader.GetString();
+                if (stringValue == null)
+                    throw new JsonException($"Unable to convert null string to {typeToConvert.Name}");
 
-                if (Enum.TryParse(s, out TEnum parsedEnum))
-                    return parsedEnum;
+                var stringToEnum = GetStringToEnumMapping(typeToConvert);
 
-                throw new JsonSerializationException($"Unable to convert \"{s}\" to {objectType.Name}");
+                if (stringToEnum.TryGetValue(stringValue, out var enumValue))
+                    return enumValue;
+
+                throw new JsonException($"Unable to convert \"{stringValue}\" to {typeToConvert.Name}");
             }
-
-            if (reader.TokenType == JsonToken.Integer)
+            else if (reader.TokenType == JsonTokenType.Number)
             {
-                var n = Convert.ToInt32(reader.Value);
-                if (Enum.IsDefined(typeof(TEnum), n))
-                    return (TEnum)Enum.ToObject(typeof(TEnum), n);
-                throw new JsonSerializationException($"Unable to convert {n} to {objectType.Name}");
+                var numericValue = reader.GetInt32();
+
+                // Check if the numeric value corresponds to a valid enum value
+                // by checking if it's defined in the enum
+                if (Enum.IsDefined(typeToConvert, numericValue))
+                {
+                    return (TEnum)Enum.ToObject(typeToConvert, numericValue);
+                }
+                throw new JsonException($"Unable to convert {numericValue} to {typeToConvert.Name}");
             }
-
-            if (reader.TokenType == JsonToken.Null && Nullable.GetUnderlyingType(objectType) != null) return null;
-
-            throw new JsonSerializationException($"Expected String or Integer, got {reader.TokenType}");
+            else
+            {
+                throw new JsonException($"Expected String or Number, got {reader.TokenType}");
+            }
         }
 
-        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, TEnum value, JsonSerializerOptions options)
         {
-            if (value == null)
+            var enumToString = GetEnumToStringMapping(typeof(TEnum));
+
+            if (enumToString.TryGetValue(value, out var stringValue))
             {
-                writer.WriteNull();
-                return;
+                writer.WriteStringValue(stringValue);
             }
-            writer.WriteValue(value.ToString());
+            else
+            {
+                writer.WriteStringValue(value.ToString());
+            }
+        }
+
+        private static Dictionary<TEnum, string> GetEnumToStringMapping(Type enumType)
+        {
+            return EnumToStringCache.GetOrAdd(enumType, type =>
+            {
+                var mapping = new Dictionary<TEnum, string>();
+                var enumValues = Enum.GetValues(type).Cast<TEnum>();
+
+                foreach (var enumValue in enumValues)
+                {
+                    var memberInfo = type.GetMember(enumValue.ToString()).FirstOrDefault();
+                    var enumMemberAttr = memberInfo?.GetCustomAttribute<EnumMemberAttribute>();
+
+                    var stringValue = enumMemberAttr?.Value ?? enumValue.ToString();
+                    mapping[enumValue] = stringValue;
+                }
+
+                return mapping;
+            });
+        }
+
+        private static Dictionary<string, TEnum> GetStringToEnumMapping(Type enumType)
+        {
+            return StringToEnumCache.GetOrAdd(enumType, type =>
+            {
+                var mapping = new Dictionary<string, TEnum>(StringComparer.OrdinalIgnoreCase);
+                var enumValues = Enum.GetValues(type).Cast<TEnum>();
+
+                foreach (var enumValue in enumValues)
+                {
+                    var memberInfo = type.GetMember(enumValue.ToString()).FirstOrDefault();
+                    var enumMemberAttr = memberInfo?.GetCustomAttribute<EnumMemberAttribute>();
+
+                    var stringValue = enumMemberAttr?.Value ?? enumValue.ToString();
+                    mapping[stringValue] = enumValue;
+                }
+
+                return mapping;
+            });
+        }
+    }
+
+    /// <summary>
+    /// Factory for creating EnumMember JSON converters
+    /// </summary>
+    public class EnumMemberJsonConverterFactory : JsonConverterFactory
+    {
+        public override bool CanConvert(Type typeToConvert)
+        {
+            return typeToConvert.IsEnum;
+        }
+
+        public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        {
+            var converterType = typeof(EnumMemberJsonConverter<>).MakeGenericType(typeToConvert);
+            return (JsonConverter)Activator.CreateInstance(converterType)!;
         }
     }
 }

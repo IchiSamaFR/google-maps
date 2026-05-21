@@ -1,13 +1,13 @@
-﻿namespace GoogleMapsApi.Entities.DistanceMatrix.Response
-{
-    using System;
-    using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
+namespace GoogleMapsApi.Entities.Common
+{
     /// <summary>
-	/// duration indicates the total duration of this leg
-	/// These fields may be absent if the duration is unknown.
-	/// </summary>
-	[DataContract(Name = "duration")]
+    /// duration indicates the total duration of this leg
+    /// These fields may be absent if the duration is unknown.
+    /// </summary>
+    [DataContract(Name = "duration")]
     public class Duration
     {
         [DataMember(Name = "value")]
@@ -15,11 +15,11 @@
         {
             get
             {
-                return (int)Math.Round(this.Value.TotalSeconds);
+                return (int)Math.Round(Value.TotalSeconds);
             }
             set
             {
-                this.Value = TimeSpan.FromSeconds(value);
+                Value = TimeSpan.FromSeconds(value);
             }
         }
 
@@ -32,6 +32,9 @@
         /// text contains a human-readable representation of the duration.
         /// </summary>
         [DataMember(Name = "text")]
-        public string Text { get; set; } = null!;
+        public string? Text { get; set; }
+
+        [DataMember(Name = "time_zone")]
+        public string? TimeZone { get; set; }
     }
 }

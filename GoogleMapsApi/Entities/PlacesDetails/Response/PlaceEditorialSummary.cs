@@ -1,5 +1,5 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesDetails.Response
 {
@@ -11,13 +11,13 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Response
         /// <summary>
         /// The language of the previous fields. May not always be present.
         /// </summary>
-        [JsonProperty("language")]
+        [JsonPropertyName("language")]
         public string Language { get; set; } = null!;
 
         /// <summary>
         /// A medium-length textual summary of the place.
         /// </summary>
-        [JsonProperty("overview")]
+        [JsonPropertyName("overview")]
         public string Overview { get; set; } = null!;
     }
 }

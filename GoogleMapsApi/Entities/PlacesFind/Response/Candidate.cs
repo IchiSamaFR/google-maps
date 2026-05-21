@@ -1,6 +1,6 @@
 ﻿using GoogleMapsApi.Entities.Common;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace GoogleMapsApi.Entities.PlacesFind.Response
@@ -8,51 +8,51 @@ namespace GoogleMapsApi.Entities.PlacesFind.Response
     public class Candidate
     {
         // basic fields
-        [JsonProperty("formatted_address")]
+        [JsonPropertyName("formatted_address")]
         public string FormattedAddress { get; set; } = null!;
 
-        [JsonProperty("geometry")]
+        [JsonPropertyName("geometry")]
         public Geometry Geometry { get; set; } = null!;
 
-        [JsonProperty("icon")]
+        [JsonPropertyName("icon")]
         public string Icon { get; set; } = null!;
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string ID { get; set; } = null!;
 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; } = null!;
 
-        [JsonProperty("permanently_closed")]
+        [JsonPropertyName("permanently_closed")]
         public bool? PermanentlyClosed { get; set; }
 
-        [JsonProperty("photos")]
+        [JsonPropertyName("photos")]
         public IEnumerable<Photo> Photos { get; set; } = null!;
 
-        [JsonProperty("place_id")]
+        [JsonPropertyName("place_id")]
         public string PlaceId { get; set; } = null!;
 
-        [JsonProperty("plus_code")]
+        [JsonPropertyName("plus_code")]
         public string PlusCode { get; set; } = null!;
 
-        [JsonProperty("scope")]
+        [JsonPropertyName("scope")]
         public string Scope { get; set; } = null!;
 
-        [JsonProperty("types")]
+        [JsonPropertyName("types")]
         public string[] Types { get; set; } = null!;
 
         // contact fields
         /// <summary>
         /// Place Search returns only open_now; use a Place Details request to get the full opening_hours results.
         /// </summary>
-        [JsonProperty("opening_hours")]
+        [JsonPropertyName("opening_hours")]
         public OpeningHours OpeningHours { get; set; } = null!;
 
         // atmosphere fields
-        [JsonProperty("price_level")]
+        [JsonPropertyName("price_level")]
         public int? PriceLevel { get; set; }
 
-        [JsonProperty("rating")]
+        [JsonPropertyName("rating")]
         public double? Rating { get; set; }
     }
 }

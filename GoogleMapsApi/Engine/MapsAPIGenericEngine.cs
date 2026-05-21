@@ -1,34 +1,27 @@
 using GoogleMapsApi.Entities.Common;
-using Newtonsoft.Json;
 using System;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace GoogleMapsApi.Engine
 {
     public delegate Uri UriCreatedDelegate(Uri uri);
     public delegate void RawResponseReceivedDelegate(byte[] data);
 
-    public abstract class MapsAPIGenericEngine<
-        TRequest,
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TResponse>
+    public abstract class MapsAPIGenericEngine<TRequest, TResponse>
         where TRequest : MapsBaseRequest, new()
-        where TResponse : class, IResponseFor<TRequest>
+        where TResponse : IResponseFor<TRequest>
     {
         internal static event UriCreatedDelegate? OnUriCreated;
         internal static event RawResponseReceivedDelegate? OnRawResponseReceived;
 
         private static readonly HttpClient client = new HttpClient();
 
-        protected internal static async Task<TResponse> QueryGoogleAPIAsync(
-            TRequest request,
-            TimeSpan timeout,
-            CancellationToken token = default)
+        protected internal static async Task<TResponse> QueryGoogleAPIAsync(TRequest request, TimeSpan timeout, CancellationToken token = default)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -37,29 +30,10 @@ namespace GoogleMapsApi.Engine
             var uri = OnUriCreated?.Invoke(requestUri) ?? requestUri;
 
             var responseContent = await GetHttpResponseAsync(uri, timeout, token).ConfigureAwait(false);
-            var bytes = Encoding.UTF8.GetBytes(responseContent);
 
-            OnRawResponseReceived?.Invoke(bytes);
+            OnRawResponseReceived?.Invoke(Encoding.UTF8.GetBytes(responseContent));
 
-            var typeInfo = typeof(TResponse);
-            if (typeInfo == null)
-            {
-                throw new InvalidOperationException($"No JsonTypeInfo found for {typeof(TResponse).Name} in GoogleMapsJsonSerializerContext.");
-            }
-
-            TResponse? result;
-            using (var stringReader = new StringReader(responseContent))
-            using (var jsonReader = new JsonTextReader(stringReader))
-            {
-                var serializer = JsonSerializerConfiguration.CreateOptions();
-                result = JsonConvert.DeserializeObject<TResponse>(responseContent, serializer);
-            }
-
-            if (result == null)
-            {
-                throw new JsonException($"Failed to deserialize response to {typeof(TResponse).Name}.");
-            }
-            return result;
+            return JsonSerializer.Deserialize<TResponse>(responseContent)!;
         }
 
         private static async Task<string> GetHttpResponseAsync(Uri uri, TimeSpan timeout, CancellationToken cancellationToken)
