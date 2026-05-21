@@ -60,6 +60,20 @@ namespace GoogleMapsApi.Engine
     [JsonSerializable(typeof(PlacesTextResponse))]
     [JsonSerializable(typeof(PlacesTextResult))]
     [JsonSerializable(typeof(TimeZoneResponse))]
+
+    [JsonSerializable(typeof(AddressLocation))]
+    [JsonSerializable(typeof(Distance))]
+    [JsonSerializable(typeof(Duration))]
+    [JsonSerializable(typeof(Geometry))]
+    [JsonSerializable(typeof(ILocationString))]
+    [JsonSerializable(typeof(Location))]
+    [JsonSerializable(typeof(MapsBaseRequest))]
+    [JsonSerializable(typeof(OpeningHours))]
+    [JsonSerializable(typeof(Photo))]
+    [JsonSerializable(typeof(PlusCode))]
+    [JsonSerializable(typeof(SignableRequest))]
+    [JsonSerializable(typeof(StatusCodes))]
+    [JsonSerializable(typeof(LocationType))]
     public partial class GoogleMapsJsonSerializerContext : JsonSerializerContext
     {
     }
