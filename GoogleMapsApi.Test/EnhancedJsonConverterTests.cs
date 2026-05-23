@@ -20,7 +20,7 @@ namespace GoogleMapsApi.Test
         public void Setup()
         {
             // Use centralized configuration for consistency with production code
-            _options = JsonSerializerConfiguration.CreateOptions();
+            _options = GoogleMapsJsonSerializerContext.Default.Options;
             
         }
 

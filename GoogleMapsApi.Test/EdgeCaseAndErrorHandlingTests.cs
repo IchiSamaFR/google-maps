@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Net;
 using System.Linq;
+using GoogleMapsApi.Engine;
 
 namespace GoogleMapsApi.Test
 {
@@ -24,7 +25,7 @@ namespace GoogleMapsApi.Test
         public void Setup()
         {
             // Use the exact same JSON configuration as production code
-            _options = GoogleMapsApi.Engine.JsonSerializerConfiguration.CreateOptions();
+            _options = GoogleMapsJsonSerializerContext.Default.Options;
             
             // Add specific converters needed for edge case testing
             _options.Converters.Add(new EnumMemberJsonConverter<TravelMode>());

@@ -13,6 +13,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using GoogleMapsApi.Engine;
 
 namespace GoogleMapsApi.Test
 {
@@ -25,7 +26,7 @@ namespace GoogleMapsApi.Test
         public void Setup()
         {
             // Use the exact same JSON configuration as production code
-            _options = GoogleMapsApi.Engine.JsonSerializerConfiguration.CreateOptions();
+            _options = GoogleMapsJsonSerializerContext.Default.Options;
         }
 
         #region Request Entity Null Safety Tests

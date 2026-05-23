@@ -22,7 +22,7 @@ namespace GoogleMapsApi.Engine
         internal static event RawResponseReceivedDelegate? OnRawResponseReceived;
 
 		private static readonly HttpClient client = new HttpClient();
-		private static readonly JsonSerializerOptions jsonOptions = JsonSerializerConfiguration.CreateOptions();
+		private static readonly JsonSerializerOptions jsonOptions = GoogleMapsJsonSerializerContext.Default.Options;
 
 		protected internal static Task<TResponse> QueryGoogleAPIAsync(TRequest request, TimeSpan timeout, CancellationToken token = default)
 		{

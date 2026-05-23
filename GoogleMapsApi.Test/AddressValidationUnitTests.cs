@@ -115,7 +115,7 @@ namespace GoogleMapsApi.Test
                        "{\"componentType\":\"postal_code\",\"confirmationLevel\":\"UNCONFIRMED_AND_SUSPICIOUS\"}" +
                        "]}}}";
 
-            var options = JsonSerializerConfiguration.CreateOptions();
+            var options = GoogleMapsJsonSerializerContext.Default.Options;
             var response = JsonSerializer.Deserialize<AddressValidationResponse>(json, options);
 
             Assert.That(response, Is.Not.Null);
