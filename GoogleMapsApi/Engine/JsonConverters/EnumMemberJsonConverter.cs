@@ -107,21 +107,4 @@ namespace GoogleMapsApi.Engine.JsonConverters
             });
         }
     }
-
-    /// <summary>
-    /// Factory for creating EnumMember JSON converters
-    /// </summary>
-    public class EnumMemberJsonConverterFactory : JsonConverterFactory
-    {
-        public override bool CanConvert(Type typeToConvert)
-        {
-            return typeToConvert.IsEnum;
-        }
-
-        public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
-        {
-            var converterType = typeof(EnumMemberJsonConverter<>).MakeGenericType(typeToConvert);
-            return (JsonConverter)Activator.CreateInstance(converterType)!;
-        }
-    }
 }

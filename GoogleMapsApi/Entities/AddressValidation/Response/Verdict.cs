@@ -1,3 +1,4 @@
+using GoogleMapsApi.Engine.JsonConverters;
 using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.AddressValidation.Response
@@ -9,14 +10,17 @@ namespace GoogleMapsApi.Entities.AddressValidation.Response
     {
         /// <summary>Granularity of the input address as Google parsed it.</summary>
         [JsonPropertyName("inputGranularity")]
+        [JsonConverter(typeof(EnumMemberJsonConverter<Granularity>))]
         public Granularity InputGranularity { get; set; }
 
         /// <summary>Granularity at which Google was able to fully validate the address.</summary>
         [JsonPropertyName("validationGranularity")]
+        [JsonConverter(typeof(EnumMemberJsonConverter<Granularity>))]
         public Granularity ValidationGranularity { get; set; }
 
         /// <summary>Granularity at which the geocode for the address was determined.</summary>
         [JsonPropertyName("geocodeGranularity")]
+        [JsonConverter(typeof(EnumMemberJsonConverter<Granularity>))]
         public Granularity GeocodeGranularity { get; set; }
 
         /// <summary>True if the address has no missing or unresolved components.</summary>

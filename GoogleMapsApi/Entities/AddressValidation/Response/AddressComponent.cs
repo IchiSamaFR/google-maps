@@ -1,3 +1,4 @@
+using GoogleMapsApi.Engine.JsonConverters;
 using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.AddressValidation.Response
@@ -18,6 +19,7 @@ namespace GoogleMapsApi.Entities.AddressValidation.Response
 
         /// <summary>Confidence that this component is correctly identified.</summary>
         [JsonPropertyName("confirmationLevel")]
+        [JsonConverter(typeof(EnumMemberJsonConverter<ConfirmationLevel>))]
         public ConfirmationLevel ConfirmationLevel { get; set; }
 
         /// <summary>True if Google inferred this component (it was not in the input).</summary>
