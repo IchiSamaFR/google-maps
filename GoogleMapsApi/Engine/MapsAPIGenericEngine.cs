@@ -22,7 +22,6 @@ namespace GoogleMapsApi.Engine
         internal static event RawResponseReceivedDelegate? OnRawResponseReceived;
 
 		private static readonly HttpClient client = new HttpClient();
-		private static readonly JsonSerializerOptions jsonOptions = JsonSerializerConfiguration.CreateOptions();
 
 		protected internal static async Task<TResponse> QueryGoogleAPIAsync(TRequest request, TimeSpan timeout, CancellationToken token = default)
 		{
@@ -36,7 +35,7 @@ namespace GoogleMapsApi.Engine
 
             OnRawResponseReceived?.Invoke(Encoding.UTF8.GetBytes(responseContent));
 
-            return JsonSerializer.Deserialize<TResponse>(responseContent, jsonOptions)!;
+            return JsonSerializer.Deserialize<TResponse>(responseContent)!;
 		}
 
 		private static async Task<string> GetHttpResponseAsync(Uri uri, TimeSpan timeout, CancellationToken cancellationToken)
