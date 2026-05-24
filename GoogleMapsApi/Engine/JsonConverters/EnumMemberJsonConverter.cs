@@ -14,12 +14,6 @@ namespace GoogleMapsApi.Engine.JsonConverters
     /// </summary>
     public class EnumMemberJsonConverter<TEnum> : JsonConverter<TEnum> where TEnum : struct, Enum
     {
-        private static readonly ConcurrentDictionary<Type, Dictionary<TEnum, string>> EnumToStringCache 
-            = new ConcurrentDictionary<Type, Dictionary<TEnum, string>>();
-        
-        private static readonly ConcurrentDictionary<Type, Dictionary<string, TEnum>> StringToEnumCache 
-            = new ConcurrentDictionary<Type, Dictionary<string, TEnum>>();
-
         public override TEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.String)
@@ -27,10 +21,8 @@ namespace GoogleMapsApi.Engine.JsonConverters
                 var stringValue = reader.GetString();
                 if (stringValue == null)
                     throw new JsonException($"Unable to convert null string to {typeToConvert.Name}");
-                    
-                var stringToEnum = GetStringToEnumMapping(typeToConvert);
 
-                if (stringToEnum.TryGetValue(stringValue, out var enumValue))
+                if (Enum.TryParse<TEnum>(stringValue, true, out var enumValue))
                     return enumValue;
 
                 throw new JsonException($"Unable to convert \"{stringValue}\" to {typeToConvert.Name}");
@@ -38,7 +30,7 @@ namespace GoogleMapsApi.Engine.JsonConverters
             else if (reader.TokenType == JsonTokenType.Number)
             {
                 var numericValue = reader.GetInt32();
-                
+
                 // Check if the numeric value corresponds to a valid enum value
                 // by checking if it's defined in the enum
                 if (Enum.IsDefined(typeToConvert, numericValue))
@@ -55,56 +47,11 @@ namespace GoogleMapsApi.Engine.JsonConverters
 
         public override void Write(Utf8JsonWriter writer, TEnum value, JsonSerializerOptions options)
         {
-            var enumToString = GetEnumToStringMapping(typeof(TEnum));
-            
-            if (enumToString.TryGetValue(value, out var stringValue))
-            {
-                writer.WriteStringValue(stringValue);
-            }
-            else
-            {
-                writer.WriteStringValue(value.ToString());
-            }
-        }
+            var stringValue = value.ToString();
+            if (stringValue == null)
+                throw new JsonException($"Unable to convert {value} to string for {typeof(TEnum).Name}");
 
-        private static Dictionary<TEnum, string> GetEnumToStringMapping(Type enumType)
-        {
-            return EnumToStringCache.GetOrAdd(enumType, type =>
-            {
-                var mapping = new Dictionary<TEnum, string>();
-                var enumValues = Enum.GetValues(type).Cast<TEnum>();
-
-                foreach (var enumValue in enumValues)
-                {
-                    var memberInfo = type.GetMember(enumValue.ToString()).FirstOrDefault();
-                    var enumMemberAttr = memberInfo?.GetCustomAttribute<EnumMemberAttribute>();
-                    
-                    var stringValue = enumMemberAttr?.Value ?? enumValue.ToString();
-                    mapping[enumValue] = stringValue;
-                }
-
-                return mapping;
-            });
-        }
-
-        private static Dictionary<string, TEnum> GetStringToEnumMapping(Type enumType)
-        {
-            return StringToEnumCache.GetOrAdd(enumType, type =>
-            {
-                var mapping = new Dictionary<string, TEnum>(StringComparer.OrdinalIgnoreCase);
-                var enumValues = Enum.GetValues(type).Cast<TEnum>();
-
-                foreach (var enumValue in enumValues)
-                {
-                    var memberInfo = type.GetMember(enumValue.ToString()).FirstOrDefault();
-                    var enumMemberAttr = memberInfo?.GetCustomAttribute<EnumMemberAttribute>();
-                    
-                    var stringValue = enumMemberAttr?.Value ?? enumValue.ToString();
-                    mapping[stringValue] = enumValue;
-                }
-
-                return mapping;
-            });
+            writer.WriteStringValue(stringValue);
         }
     }
 }

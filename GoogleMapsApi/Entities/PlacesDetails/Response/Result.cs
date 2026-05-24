@@ -32,7 +32,7 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Response
         /// Indicates the operational status of the place, if it is a business.
         /// </summary>
         [JsonPropertyName("business_status")]
-        [JsonConverter(typeof(EnumMemberJsonConverter<BusinessStatus>))]
+        [JsonConverter(typeof(NullableEnumMemberJsonConverter<BusinessStatus>))]
         public BusinessStatus? BusinessStatus { get; set; }
 
         /// <summary>
