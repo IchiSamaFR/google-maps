@@ -18,16 +18,9 @@ namespace GoogleMapsApi.Test
     [TestFixture]
     public class EdgeCaseAndErrorHandlingTests
     {
-        private JsonSerializerOptions _options;
-
         [SetUp]
         public void Setup()
         {
-            // Use the exact same JSON configuration as production code
-            _options = GoogleMapsApi.Engine.JsonSerializerConfiguration.CreateOptions();
-            
-            // Add specific converters needed for edge case testing
-            _options.Converters.Add(new EnumMemberJsonConverter<TravelMode>());
         }
 
         #region Extreme Input Validation Tests
@@ -149,7 +142,7 @@ namespace GoogleMapsApi.Test
 
             Assert.DoesNotThrow(() =>
             {
-                var response = JsonSerializer.Deserialize<DirectionsResponse>(unicodeJson, _options);
+                var response = JsonSerializer.Deserialize<DirectionsResponse>(unicodeJson);
                 Assert.That(response, Is.Not.Null);
                 Assert.That(response.Routes, Is.Not.Null);
                 Assert.That(response.Routes.Count(), Is.EqualTo(1));
@@ -174,7 +167,7 @@ namespace GoogleMapsApi.Test
 
             Assert.DoesNotThrow(() =>
             {
-                var duration = JsonSerializer.Deserialize<Entities.Common.Duration>(largeNumbersJson, _options);
+                var duration = JsonSerializer.Deserialize<Entities.Common.Duration>(largeNumbersJson);
                 Assert.That(duration, Is.Not.Null);
                 Assert.That(duration.Value, Is.EqualTo(TimeSpan.FromSeconds(2147483647)));
             });
@@ -192,7 +185,7 @@ namespace GoogleMapsApi.Test
             {
                 try
                 {
-                    var duration = JsonSerializer.Deserialize<Entities.Common.Duration>(beyondInt32Json, _options);
+                    var duration = JsonSerializer.Deserialize<Entities.Common.Duration>(beyondInt32Json);
                 }
                 catch (JsonException)
                 {
@@ -235,7 +228,7 @@ namespace GoogleMapsApi.Test
 
             Assert.DoesNotThrow(() =>
             {
-                var response = JsonSerializer.Deserialize<DirectionsResponse>(deeplyNestedJson, _options);
+                var response = JsonSerializer.Deserialize<DirectionsResponse>(deeplyNestedJson);
                 Assert.That(response, Is.Not.Null);
                 Assert.That(response.Routes, Is.Not.Null);
                 Assert.That(response.Routes.Count(), Is.EqualTo(1));
@@ -390,7 +383,7 @@ namespace GoogleMapsApi.Test
                 {
                     try
                     {
-                        var response = JsonSerializer.Deserialize<DirectionsResponse>(errorJson, _options);
+                        var response = JsonSerializer.Deserialize<DirectionsResponse>(errorJson);
                         Assert.That(response, Is.Not.Null);
                         // Status should be parsed or default to appropriate value
                     }
@@ -424,9 +417,9 @@ namespace GoogleMapsApi.Test
             {
                 Assert.DoesNotThrow(() =>
                 {
-                    var response = JsonSerializer.Deserialize<DirectionsResponse>(partialJson, _options);
+                    var response = JsonSerializer.Deserialize<DirectionsResponse>(partialJson);
                     Assert.That(response, Is.Not.Null);
-                    Assert.That(response.Status, Is.EqualTo(DirectionsStatusCodes.OK));
+                    Assert.That(response.Status, Is.EqualTo(StatusCodes.OK));
                 }, $"Partial response caused crash: {partialJson}");
             }
         }
@@ -461,7 +454,7 @@ namespace GoogleMapsApi.Test
                     {
                         for (int j = 0; j < 100; j++)
                         {
-                            var response = JsonSerializer.Deserialize<DirectionsResponse>(json, _options);
+                            var response = JsonSerializer.Deserialize<DirectionsResponse>(json);
                             Assert.That(response, Is.Not.Null);
                             Assert.That(response!.Routes, Is.Not.Null);
                             Assert.That(response.Routes.Count(), Is.EqualTo(1));
@@ -502,7 +495,7 @@ namespace GoogleMapsApi.Test
                 
                 Assert.DoesNotThrow(() =>
                 {
-                    var duration = JsonSerializer.Deserialize<Entities.Common.Duration>(json, _options);
+                    var duration = JsonSerializer.Deserialize<Duration>(json);
                     Assert.That(duration, Is.Not.Null);
                     Assert.That(duration.Value, Is.EqualTo(expectedTimeSpan));
                 }, $"Duration conversion failed for {seconds} seconds");
@@ -519,12 +512,12 @@ namespace GoogleMapsApi.Test
                 Assert.DoesNotThrow(() =>
                 {
                     // Test serialization
-                    var json = JsonSerializer.Serialize(mode, _options);
+                    var json = JsonSerializer.Serialize(mode);
                     Assert.That(json, Is.Not.Null);
                     Assert.That(json.Length, Is.GreaterThan(0));
                     
                     // Test deserialization
-                    var deserialized = JsonSerializer.Deserialize<TravelMode>(json, _options);
+                    var deserialized = JsonSerializer.Deserialize<TravelMode>(json);
                     Assert.That(deserialized, Is.EqualTo(mode));
                 }, $"Enum conversion failed for TravelMode.{mode}");
             }
@@ -548,12 +541,12 @@ namespace GoogleMapsApi.Test
                 {
                     // Test numeric input
                     var numericJson = value.ToString();
-                    var numericResult = JsonSerializer.Deserialize<PriceLevel?>(numericJson, _options);
+                    var numericResult = JsonSerializer.Deserialize<PriceLevel?>(numericJson);
                     Assert.That(numericResult, Is.EqualTo(expectedLevel));
                     
                     // Test string input
                     var stringJson = $"\"{value}\"";
-                    var stringResult = JsonSerializer.Deserialize<PriceLevel?>(stringJson, _options);
+                    var stringResult = JsonSerializer.Deserialize<PriceLevel?>(stringJson);
                     Assert.That(stringResult, Is.EqualTo(expectedLevel));
                 }, $"Price level conversion failed for value {value}");
             }

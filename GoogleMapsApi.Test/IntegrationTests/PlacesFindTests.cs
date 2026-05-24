@@ -1,4 +1,5 @@
-﻿using GoogleMapsApi.Entities.PlacesFind.Request;
+﻿using GoogleMapsApi.Entities.Common;
+using GoogleMapsApi.Entities.PlacesFind.Request;
 using GoogleMapsApi.Entities.PlacesFind.Response;
 using GoogleMapsApi.Test.Utils;
 using NUnit.Framework;
@@ -26,7 +27,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             PlacesFindResponse result = await GoogleMaps.PlacesFind.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Candidates, Is.Not.Empty);
         }
 

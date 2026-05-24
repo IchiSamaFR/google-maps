@@ -4,6 +4,7 @@ using GoogleMapsApi.Entities.PlacesDetails.Request;
 using GoogleMapsApi.Entities.PlacesDetails.Response;
 using NUnit.Framework;
 using GoogleMapsApi.Test.Utils;
+using GoogleMapsApi.Entities.Common;
 
 namespace GoogleMapsApi.Test.IntegrationTests
 {
@@ -25,7 +26,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = await GoogleMaps.PlacesDetails.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Result.AddressComponent, Is.Not.Null.And.Not.Empty);
 
             // Extract street address using the helper method
@@ -46,7 +47,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = await GoogleMaps.PlacesDetails.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
 
             // Extract state using the helper method
             var state = result.Result.GetState();
@@ -68,7 +69,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = await GoogleMaps.PlacesDetails.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
 
             // Extract postal code using the helper method
             var postalCode = result.Result.GetPostalCode();
@@ -87,7 +88,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = await GoogleMaps.PlacesDetails.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
 
             // Extract complete address breakdown
             var addressBreakdown = result.Result.GetAddressBreakdown();
@@ -117,7 +118,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = await GoogleMaps.PlacesDetails.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
 
             // Extract city using the helper method
             var city = result.Result.GetCity();
@@ -138,7 +139,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = await GoogleMaps.PlacesDetails.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
 
             // Extract country using the helper method
             var country = result.Result.GetCountry();

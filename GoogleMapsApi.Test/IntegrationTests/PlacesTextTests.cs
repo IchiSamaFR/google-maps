@@ -4,6 +4,7 @@ using GoogleMapsApi.Entities.PlacesText.Response;
 using NUnit.Framework;
 using GoogleMapsApi.Test.Utils;
 using System.Threading.Tasks;
+using GoogleMapsApi.Entities.Common;
 
 namespace GoogleMapsApi.Test.IntegrationTests
 {
@@ -23,7 +24,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             PlacesTextResponse result = await GoogleMaps.PlacesText.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
             Assert.That(result.Results!.First().FormattedAddress, Is.EqualTo("1 Smith St, Parramatta NSW 2150, Australia"));
         }
@@ -41,7 +42,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             PlacesTextResponse result = await GoogleMaps.PlacesText.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty);
         }
 
@@ -57,7 +58,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             PlacesTextResponse firstResponse = await GoogleMaps.PlacesText.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(firstResponse);
-            Assert.That(firstResponse.Status, Is.EqualTo(Status.OK));
+            Assert.That(firstResponse.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(firstResponse.Results, Is.Not.Null.And.Not.Empty);
             
             if (string.IsNullOrWhiteSpace(firstResponse.NextPage))
@@ -78,7 +79,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             PlacesTextResponse secondResponse = await GoogleMaps.PlacesText.QueryAsync(secondRequest);
 
             AssertInconclusive.NotExceedQuota(secondResponse);
-            Assert.That(secondResponse.Status, Is.EqualTo(Status.OK));
+            Assert.That(secondResponse.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(secondResponse.Results, Is.Not.Null.And.Not.Empty);
             
             var firstResultsIds = firstResponse.Results.Select(r => r.PlaceId).ToArray();

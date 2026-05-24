@@ -24,7 +24,7 @@ namespace GoogleMapsApi.Test.Utils
         /// </summary>
         public static void NotExceedQuota(GeocodingResponse response)
         {
-            if (response?.Status == Entities.Geocoding.Response.Status.OVER_QUERY_LIMIT)
+            if (response?.Status == StatusCodes.OVER_QUERY_LIMIT)
                 throw new InconclusiveException(QuotaExceedMessage);
         }
 
@@ -33,7 +33,7 @@ namespace GoogleMapsApi.Test.Utils
         /// </summary>
         public static void NotExceedQuota(DirectionsResponse response)
         {
-            if (response?.Status == DirectionsStatusCodes.OVER_QUERY_LIMIT)
+            if (response?.Status == StatusCodes.OVER_QUERY_LIMIT)
                 throw new InconclusiveException(QuotaExceedMessage);
         }
 
@@ -42,7 +42,7 @@ namespace GoogleMapsApi.Test.Utils
         /// </summary>
         public static void NotExceedQuota(ElevationResponse response)
         {
-            if (response?.Status == Entities.Elevation.Response.Status.OVER_QUERY_LIMIT)
+            if (response?.Status == StatusCodes.OVER_QUERY_LIMIT)
                 throw new InconclusiveException(QuotaExceedMessage);
         }
 
@@ -51,7 +51,7 @@ namespace GoogleMapsApi.Test.Utils
         /// </summary>
         public static void NotExceedQuota(TimeZoneResponse response)
         {
-            if (response?.Status == Entities.TimeZone.Response.Status.OVER_QUERY_LIMIT)
+            if (response?.Status == StatusCodes.OVER_QUERY_LIMIT)
                 throw new InconclusiveException(QuotaExceedMessage);
         }
 
@@ -69,7 +69,7 @@ namespace GoogleMapsApi.Test.Utils
         /// </summary>
         public static void NotExceedQuota(PlaceAutocompleteResponse response)
         {
-            if (response?.Status == Entities.PlaceAutocomplete.Response.Status.OVER_QUERY_LIMIT)
+            if (response?.Status == StatusCodes.OVER_QUERY_LIMIT)
                 throw new InconclusiveException(QuotaExceedMessage);
         }
 
@@ -78,7 +78,7 @@ namespace GoogleMapsApi.Test.Utils
         /// </summary>
         public static void NotExceedQuota(PlacesDetailsResponse response)
         {
-            if (response?.Status == Entities.PlacesDetails.Response.Status.OVER_QUERY_LIMIT)
+            if (response?.Status == StatusCodes.OVER_QUERY_LIMIT)
                 throw new InconclusiveException(QuotaExceedMessage);
         }
 
@@ -87,7 +87,7 @@ namespace GoogleMapsApi.Test.Utils
         /// </summary>
         public static void NotExceedQuota(PlacesNearByResponse response)
         {
-            if (response?.Status == Entities.PlacesNearBy.Response.Status.OVER_QUERY_LIMIT)
+            if (response?.Status == StatusCodes.OVER_QUERY_LIMIT)
                 throw new InconclusiveException(QuotaExceedMessage);
         }
 
@@ -96,7 +96,7 @@ namespace GoogleMapsApi.Test.Utils
         /// </summary>
         public static void NotExceedQuota(PlacesResponse response)
         {
-            if (response?.Status == Entities.Places.Response.Status.OVER_QUERY_LIMIT)
+            if (response?.Status == StatusCodes.OVER_QUERY_LIMIT)
                 throw new InconclusiveException(QuotaExceedMessage);
         }
 
@@ -105,7 +105,7 @@ namespace GoogleMapsApi.Test.Utils
         /// </summary>
         public static void NotExceedQuota(PlacesTextResponse response)
         {
-            if (response?.Status == Entities.PlacesText.Response.Status.OVER_QUERY_LIMIT)
+            if (response?.Status == StatusCodes.OVER_QUERY_LIMIT)
                 throw new InconclusiveException(QuotaExceedMessage);
         }
 
@@ -114,7 +114,7 @@ namespace GoogleMapsApi.Test.Utils
         /// </summary>
         public static void NotExceedQuota(PlacesFindResponse response)
         {
-            if (response?.Status == Entities.PlacesFind.Response.Status.OVER_QUERY_LIMIT)
+            if (response?.Status == StatusCodes.OVER_QUERY_LIMIT)
                 throw new InconclusiveException(QuotaExceedMessage);
         }
     }

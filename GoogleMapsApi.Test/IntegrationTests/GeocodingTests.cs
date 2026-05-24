@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GoogleMapsApi.Entities.Common;
 using GoogleMapsApi.Entities.Geocoding.Request;
 using NUnit.Framework;
-using Status = GoogleMapsApi.Entities.Geocoding.Response.Status;
 using GoogleMapsApi.Test.Utils;
 
 namespace GoogleMapsApi.Test.IntegrationTests
@@ -26,7 +25,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = await GoogleMaps.Geocode.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
             Assert.That(result.Results!.First().Geometry.Location.LocationString, Does.Match("40\\.\\d*,-73\\.\\d*"));
         }
@@ -43,7 +42,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = GoogleMaps.Geocode.QueryAsync(request).Result;
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
             // 40.{*}, -73.{*}
             Assert.That(result.Results!.First().Geometry.Location.LocationString, Does.Match("40\\.\\d*,-73\\.\\d*"));
@@ -104,7 +103,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = await GoogleMaps.Geocode.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
             Assert.That(result.Results!.First().FormattedAddress, Does.Contain("Bedford Ave, Brooklyn, NY 11211, USA"));
         }
@@ -121,7 +120,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = await GoogleMaps.Geocode.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
             Assert.That(result.Results!.First().FormattedAddress, Does.Contain("Bedford Ave, Brooklyn, NY 11211, USA"));
         }
@@ -139,7 +138,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = await GoogleMaps.Geocode.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
             Assert.That(result.Results!.First().FormattedAddress, Does.Contain("Bedford Ave, Brooklyn, NY 11211, USA"));
         }
@@ -161,7 +160,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = await GoogleMaps.Geocode.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
             Assert.That(result.Results!.First().FormattedAddress, Does.Contain("Bedford Ave, Brooklyn, NY 11211, USA"));
         }
@@ -179,7 +178,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = await GoogleMaps.Geocode.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
             Assert.That(result.Results!.First().FormattedAddress, Does.Contain("Bedford Ave, Brooklyn, NY 11211, USA"));
         }
@@ -197,7 +196,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = await GoogleMaps.Geocode.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
             Assert.That(result.Results!.First().FormattedAddress, Does.Contain("Bedford Ave, Brooklyn, NY 11211, USA"));
         }
@@ -214,7 +213,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             var result = GoogleMaps.Geocode.QueryAsync(request).Result;
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
             Assert.That(result.Results!.First().FormattedAddress, Does.Contain("Bedford Ave, Brooklyn, NY 11211, USA"));
         }

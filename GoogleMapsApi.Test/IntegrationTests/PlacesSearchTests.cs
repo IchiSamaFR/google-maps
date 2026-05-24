@@ -27,7 +27,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             PlacesResponse result = await GoogleMaps.Places.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
             Assert.That(result.Results!.Count(), Is.GreaterThan(5));
         }
@@ -46,7 +46,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             PlacesResponse result = await GoogleMaps.Places.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
             Assert.That(result.Results!.Any(), Is.True);
             Assert.That(result.Results!.Any(t => t.Name.Contains("John F. Kennedy")), Is.True);
@@ -66,7 +66,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             PlacesResponse result = await GoogleMaps.Places.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             //we should have more than one page of pizza results from the NearBy Search
             Assert.That(!String.IsNullOrEmpty(result.NextPage), Is.True);
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
@@ -89,7 +89,7 @@ namespace GoogleMapsApi.Test.IntegrationTests
             result = await GoogleMaps.Places.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(Status.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             //make sure the second page has some results
             Assert.That(result.Results, Is.Not.Null.And.Not.Empty, "Results should not be null or empty");
             Assert.That(result.Results!.Any(), Is.True);

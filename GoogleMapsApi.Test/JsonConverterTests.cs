@@ -7,22 +7,16 @@ using GoogleMapsApi.Entities.DistanceMatrix.Response;
 using GoogleMapsApi.Entities.PlacesDetails.Response;
 using GoogleMapsApi.Entities.Directions.Request;
 using NUnit.Framework;
+using GoogleMapsApi.Entities.Common;
 
 namespace GoogleMapsApi.Test
 {
     [TestFixture]
     public class JsonConverterTests
     {
-        private JsonSerializerOptions _options;
-
         [SetUp]
         public void Setup()
         {
-            // Use centralized configuration for consistency with production code
-            _options = JsonSerializerConfiguration.CreateOptions();
-            
-            // Add only the custom EnumMemberJsonConverter for testing
-            _options.Converters.Add(new EnumMemberJsonConverter<TravelMode>());
         }
 
         #region DurationJsonConverter Tests
@@ -32,7 +26,7 @@ namespace GoogleMapsApi.Test
         {
             var json = """{"value": 3600, "text": "1 hour"}""";
             
-            var duration = JsonSerializer.Deserialize<Entities.Common.Duration>(json, _options);
+            var duration = JsonSerializer.Deserialize<Duration>(json);
             
             Assert.That(duration, Is.Not.Null);
             Assert.That(duration.Value, Is.EqualTo(TimeSpan.FromHours(1)));
@@ -44,7 +38,7 @@ namespace GoogleMapsApi.Test
         {
             var json = """{"value": 1800, "text": "30 mins"}""";
             
-            var duration = JsonSerializer.Deserialize<GoogleMapsApi.Entities.DistanceMatrix.Response.Duration>(json, _options);
+            var duration = JsonSerializer.Deserialize<Duration>(json);
             
             Assert.That(duration, Is.Not.Null);
             Assert.That(duration.Value, Is.EqualTo(TimeSpan.FromMinutes(30)));
@@ -54,13 +48,13 @@ namespace GoogleMapsApi.Test
         [Test]
         public void DurationJsonConverter_SerializesCorrectly()
         {
-            var duration = new GoogleMapsApi.Entities.Directions.Response.Duration
+            var duration = new Duration
             {
                 Value = TimeSpan.FromMinutes(45),
                 Text = "45 mins"
             };
 
-            var json = JsonSerializer.Serialize(duration, _options);
+            var json = JsonSerializer.Serialize(duration);
             
             Assert.That(json, Does.Contain("\"value\":2700"));
             Assert.That(json, Does.Contain("\"text\":\"45 mins\""));
@@ -71,7 +65,7 @@ namespace GoogleMapsApi.Test
         {
             var json = "null";
             
-            var duration = JsonSerializer.Deserialize<Entities.Common.Duration>(json, _options);
+            var duration = JsonSerializer.Deserialize<Duration>(json);
             
             Assert.That(duration, Is.Null);
         }
@@ -82,7 +76,7 @@ namespace GoogleMapsApi.Test
             var json = "\"invalid_format\"";
             
             Assert.Throws<JsonException>(() => 
-                JsonSerializer.Deserialize<Entities.Common.Duration>(json, _options));
+                JsonSerializer.Deserialize<Duration>(json));
         }
 
         #endregion
@@ -94,7 +88,7 @@ namespace GoogleMapsApi.Test
         {
             var json = "2";
             
-            var priceLevel = JsonSerializer.Deserialize<PriceLevel?>(json, _options);
+            var priceLevel = JsonSerializer.Deserialize<PriceLevel?>(json);
             
             Assert.That(priceLevel, Is.EqualTo(PriceLevel.Moderate));
         }
@@ -104,7 +98,7 @@ namespace GoogleMapsApi.Test
         {
             var json = "\"3\"";
             
-            var priceLevel = JsonSerializer.Deserialize<PriceLevel?>(json, _options);
+            var priceLevel = JsonSerializer.Deserialize<PriceLevel?>(json);
             
             Assert.That(priceLevel, Is.EqualTo(PriceLevel.Expensive));
         }
@@ -114,7 +108,7 @@ namespace GoogleMapsApi.Test
         {
             var json = "null";
             
-            var priceLevel = JsonSerializer.Deserialize<PriceLevel?>(json, _options);
+            var priceLevel = JsonSerializer.Deserialize<PriceLevel?>(json);
             
             Assert.That(priceLevel, Is.Null);
         }
@@ -124,7 +118,7 @@ namespace GoogleMapsApi.Test
         {
             var json = "\"\"";
             
-            var priceLevel = JsonSerializer.Deserialize<PriceLevel?>(json, _options);
+            var priceLevel = JsonSerializer.Deserialize<PriceLevel?>(json);
             
             Assert.That(priceLevel, Is.Null);
         }
@@ -134,7 +128,7 @@ namespace GoogleMapsApi.Test
         {
             PriceLevel? priceLevel = PriceLevel.VeryExpensive;
             
-            var json = JsonSerializer.Serialize(priceLevel, _options);
+            var json = JsonSerializer.Serialize(priceLevel);
             
             Assert.That(json, Is.EqualTo("\"4\""));
         }
@@ -144,7 +138,7 @@ namespace GoogleMapsApi.Test
         {
             PriceLevel? priceLevel = null;
             
-            var json = JsonSerializer.Serialize(priceLevel, _options);
+            var json = JsonSerializer.Serialize(priceLevel);
             
             Assert.That(json, Is.EqualTo("null"));
         }
@@ -158,7 +152,7 @@ namespace GoogleMapsApi.Test
         {
             var json = "\"DRIVING\"";
             
-            var travelMode = JsonSerializer.Deserialize<TravelMode>(json, _options);
+            var travelMode = JsonSerializer.Deserialize<TravelMode>(json);
             
             Assert.That(travelMode, Is.EqualTo(TravelMode.Driving));
         }
@@ -168,7 +162,7 @@ namespace GoogleMapsApi.Test
         {
             var json = "\"WALKING\"";
             
-            var travelMode = JsonSerializer.Deserialize<TravelMode>(json, _options);
+            var travelMode = JsonSerializer.Deserialize<TravelMode>(json);
             
             Assert.That(travelMode, Is.EqualTo(TravelMode.Walking));
         }
@@ -178,7 +172,7 @@ namespace GoogleMapsApi.Test
         {
             var json = "\"BICYCLING\"";
             
-            var travelMode = JsonSerializer.Deserialize<TravelMode>(json, _options);
+            var travelMode = JsonSerializer.Deserialize<TravelMode>(json);
             
             Assert.That(travelMode, Is.EqualTo(TravelMode.Bicycling));
         }
@@ -188,7 +182,7 @@ namespace GoogleMapsApi.Test
         {
             var json = "\"TRANSIT\"";
             
-            var travelMode = JsonSerializer.Deserialize<TravelMode>(json, _options);
+            var travelMode = JsonSerializer.Deserialize<TravelMode>(json);
             
             Assert.That(travelMode, Is.EqualTo(TravelMode.Transit));
         }
@@ -198,7 +192,7 @@ namespace GoogleMapsApi.Test
         {
             var json = "0";
             
-            var travelMode = JsonSerializer.Deserialize<TravelMode>(json, _options);
+            var travelMode = JsonSerializer.Deserialize<TravelMode>(json);
             
             Assert.That(travelMode, Is.EqualTo(TravelMode.Driving));
         }
@@ -208,7 +202,7 @@ namespace GoogleMapsApi.Test
         {
             var travelMode = TravelMode.Driving;
             
-            var json = JsonSerializer.Serialize(travelMode, _options);
+            var json = JsonSerializer.Serialize(travelMode);
             
             Assert.That(json, Is.EqualTo("\"DRIVING\""));
         }
@@ -219,7 +213,7 @@ namespace GoogleMapsApi.Test
             var json = "\"INVALID_MODE\"";
             
             Assert.Throws<JsonException>(() => 
-                JsonSerializer.Deserialize<TravelMode>(json, _options));
+                JsonSerializer.Deserialize<TravelMode>(json));
         }
 
         [Test]
@@ -228,7 +222,7 @@ namespace GoogleMapsApi.Test
             var json = "999";
             
             Assert.Throws<JsonException>(() => 
-                JsonSerializer.Deserialize<TravelMode>(json, _options));
+                JsonSerializer.Deserialize<TravelMode>(json));
         }
 
         #endregion
@@ -240,7 +234,7 @@ namespace GoogleMapsApi.Test
         {
             var json = """{"points": "_p~iF~ps|U_ulLnnqC_mqNvxq`@"}""";
             
-            var polyline = JsonSerializer.Deserialize<OverviewPolyline>(json, _options);
+            var polyline = JsonSerializer.Deserialize<OverviewPolyline>(json);
             
             Assert.That(polyline, Is.Not.Null);
             Assert.That(polyline.Points, Is.Not.Empty);
@@ -261,7 +255,7 @@ namespace GoogleMapsApi.Test
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             onDeserializedMethod?.Invoke(polyline, null);
 
-            var json = JsonSerializer.Serialize(polyline, _options);
+            var json = JsonSerializer.Serialize(polyline);
             
             Assert.That(json, Does.Contain("simple_encoded_points"));
             Assert.That(json, Does.Contain("\"points\""));
@@ -272,7 +266,7 @@ namespace GoogleMapsApi.Test
         {
             var json = "null";
             
-            var polyline = JsonSerializer.Deserialize<OverviewPolyline>(json, _options);
+            var polyline = JsonSerializer.Deserialize<OverviewPolyline>(json);
             
             Assert.That(polyline, Is.Null);
         }
@@ -282,7 +276,7 @@ namespace GoogleMapsApi.Test
         {
             var json = """{"points": ""}""";
             
-            var polyline = JsonSerializer.Deserialize<OverviewPolyline>(json, _options);
+            var polyline = JsonSerializer.Deserialize<OverviewPolyline>(json);
             
             Assert.That(polyline, Is.Not.Null);
             Assert.That(polyline.Points, Is.Empty);
@@ -313,7 +307,7 @@ namespace GoogleMapsApi.Test
             """;
 
             // This tests that the converters work together in a realistic scenario
-            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<object>(json, _options));
+            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<object>(json));
         }
 
         #endregion
