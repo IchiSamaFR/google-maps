@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using GoogleMapsApi.Entities.PlacesDetails.Response;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace GoogleMapsApi.Entities.PlacesDetails.Response
+namespace GoogleMapsApi.Entities.Common
 {
     public class OpeningHours
     {

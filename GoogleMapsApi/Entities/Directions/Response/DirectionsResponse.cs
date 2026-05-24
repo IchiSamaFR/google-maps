@@ -21,8 +21,8 @@ namespace GoogleMapsApi.Entities.Directions.Response
 		/// "status" contains metadata on the request. See Status Codes below.
 		/// </summary>
 		[JsonPropertyName("status")]
-		[JsonConverter(typeof(EnumMemberJsonConverter<DirectionsStatusCodes>))]
-		public DirectionsStatusCodes Status { get; set; }
+		[JsonConverter(typeof(EnumMemberJsonConverter<StatusCodes>))]
+		public StatusCodes Status { get; set; }
 
 		/// <summary>
 		/// "routes" contains an array of routes from the origin to the destination. See Routes below.

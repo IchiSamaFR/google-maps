@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using GoogleMapsApi.Entities.Common;
 using GoogleMapsApi.Entities.PlacesDetails.Request;
 using GoogleMapsApi.Entities.PlacesDetails.Response;
 
@@ -26,7 +27,7 @@ namespace GoogleMapsApi.Examples
 
             var result = await GoogleMaps.PlacesDetails.QueryAsync(request);
 
-            if (result.Status == Status.OK && result.Result?.AddressComponent != null)
+            if (result.Status == StatusCodes.OK && result.Result?.AddressComponent != null)
             {
                 // Extract individual address components using helper methods
                 var streetAddress = result.Result.GetStreetAddress();
@@ -57,7 +58,7 @@ namespace GoogleMapsApi.Examples
 
             var result = await GoogleMaps.PlacesDetails.QueryAsync(request);
 
-            if (result.Status == Status.OK && result.Result?.AddressComponent != null)
+            if (result.Status == StatusCodes.OK && result.Result?.AddressComponent != null)
             {
                 // Extract complete address breakdown
                 var addressBreakdown = result.Result.GetAddressBreakdown();
@@ -93,7 +94,7 @@ namespace GoogleMapsApi.Examples
 
                 var result = await GoogleMaps.PlacesDetails.QueryAsync(request);
 
-                if (result.Status == Status.OK && result.Result?.AddressComponent != null)
+                if (result.Status == StatusCodes.OK && result.Result?.AddressComponent != null)
                 {
                     var addressBreakdown = result.Result.GetAddressBreakdown();
                     Console.WriteLine($"{result.Result.Name}: {addressBreakdown}");

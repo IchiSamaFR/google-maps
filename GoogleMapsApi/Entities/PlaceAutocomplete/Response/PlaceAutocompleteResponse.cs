@@ -13,8 +13,8 @@ namespace GoogleMapsApi.Entities.PlaceAutocomplete.Response
 		/// "status" contains metadata on the request.
 		/// </summary>
 		[JsonPropertyName("status")]
-		[JsonConverter(typeof(EnumMemberJsonConverter<Status>))]
-		public Status Status { get; set; }
+		[JsonConverter(typeof(EnumMemberJsonConverter<StatusCodes>))]
+		public StatusCodes Status { get; set; }
 
 		/// <summary>
 		/// "results" contains an array of predictions rather than full results, each including a description and a reference which can be queried further

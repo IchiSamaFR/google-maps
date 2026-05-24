@@ -1,10 +1,10 @@
 ﻿using GoogleMapsApi.Engine.JsonConverters;
-using GoogleMapsApi.Entities.Common;
+using GoogleMapsApi.Entities.Geocoding.Response;
 using System;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace GoogleMapsApi.Entities.Geocoding.Response
+namespace GoogleMapsApi.Entities.Common
 {
 	[DataContract]
 	public class Geometry

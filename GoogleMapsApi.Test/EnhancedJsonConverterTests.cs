@@ -32,7 +32,7 @@ namespace GoogleMapsApi.Test
             // Test null value in duration object
             var json = """{"value": null, "text": null}""";
             
-            var duration = JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(json, _options);
+            var duration = JsonSerializer.Deserialize<Entities.Common.Duration>(json, _options);
             
             Assert.That(duration, Is.Not.Null);
             Assert.That(duration.Text, Is.Null);
@@ -43,15 +43,15 @@ namespace GoogleMapsApi.Test
         {
             // Test missing value property
             var json1 = """{"text": "1 hour"}""";
-            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(json1, _options));
+            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<Entities.Common.Duration>(json1, _options));
 
             // Test missing text property  
             var json2 = """{"value": 3600}""";
-            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(json2, _options));
+            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<Entities.Common.Duration>(json2, _options));
 
             // Test completely empty object
             var json3 = """{}""";
-            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(json3, _options));
+            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<Entities.Common.Duration>(json3, _options));
         }
 
         [Test]
@@ -59,11 +59,11 @@ namespace GoogleMapsApi.Test
         {
             // Test string where number expected
             var json1 = """{"value": "invalid", "text": "1 hour"}""";
-            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(json1, _options));
+            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<Entities.Common.Duration>(json1, _options));
 
             // Test number where string expected
             var json2 = """{"value": 3600, "text": 123}""";
-            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(json2, _options));
+            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<Entities.Common.Duration>(json2, _options));
         }
 
         [Test]
@@ -71,13 +71,13 @@ namespace GoogleMapsApi.Test
         {
             // Test very large duration
             var json1 = """{"value": 2147483647, "text": "Very long time"}""";
-            var duration1 = JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(json1, _options);
+            var duration1 = JsonSerializer.Deserialize<Entities.Common.Duration>(json1, _options);
             Assert.That(duration1, Is.Not.Null);
             Assert.That(duration1!.Value, Is.EqualTo(TimeSpan.FromSeconds(2147483647)));
 
             // Test negative duration (should this be allowed?)
             var json2 = """{"value": -1000, "text": "Negative time"}""";
-            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(json2, _options));
+            Assert.DoesNotThrow(() => JsonSerializer.Deserialize<Entities.Common.Duration>(json2, _options));
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace GoogleMapsApi.Test
             };
 
             var json = JsonSerializer.Serialize(original, _options);
-            var deserialized = JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(json, _options);
+            var deserialized = JsonSerializer.Deserialize<Entities.Common.Duration>(json, _options);
 
             Assert.That(deserialized, Is.Not.Null);
             Assert.That(deserialized!.Value, Is.EqualTo(original.Value));
@@ -290,7 +290,7 @@ namespace GoogleMapsApi.Test
                         for (int j = 0; j < 100; j++)
                         {
                             // Test all converters concurrently
-                            JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(
+                            JsonSerializer.Deserialize<Entities.Common.Duration>(
                                 """{"value": 3600, "text": "1 hour"}""", _options);
                             
                             JsonSerializer.Deserialize<TravelMode>("\"DRIVING\"", _options);
@@ -339,7 +339,7 @@ namespace GoogleMapsApi.Test
                 {
                     try
                     {
-                        JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(malformed, _options);
+                        JsonSerializer.Deserialize<Entities.Common.Duration>(malformed, _options);
                     }
                     catch (JsonException)
                     {

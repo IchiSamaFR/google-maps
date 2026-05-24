@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GoogleMapsApi.Entities.Common;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Geocoding.Response

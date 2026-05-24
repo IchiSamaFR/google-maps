@@ -1,4 +1,5 @@
-﻿using GoogleMapsApi.Entities.Directions.Response;
+﻿using GoogleMapsApi.Entities.Common;
+using GoogleMapsApi.Entities.Directions.Response;
 using GoogleMapsApi.Entities.DistanceMatrix.Response;
 using GoogleMapsApi.Entities.Elevation.Response;
 using GoogleMapsApi.Entities.Geocoding.Response;
@@ -59,7 +60,7 @@ namespace GoogleMapsApi.Test.Utils
         /// </summary>
         public static void NotExceedQuota(DistanceMatrixResponse response)
         {
-            if (response?.Status == DistanceMatrixStatusCodes.OVER_QUERY_LIMIT)
+            if (response?.Status == StatusCodes.OVER_QUERY_LIMIT)
                 throw new InconclusiveException(QuotaExceedMessage);
         }
 

@@ -9,6 +9,7 @@
     using NUnit.Framework;
     using GoogleMapsApi.Test.Utils;
     using System.Threading.Tasks;
+    using GoogleMapsApi.Entities.Common;
 
     [TestFixture]
     public class DistanceMatrixTests : BaseTestIntegration
@@ -27,7 +28,7 @@
             var result = await GoogleMaps.DistanceMatrix.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(DistanceMatrixStatusCodes.OK), result.ErrorMessage);
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK), result.ErrorMessage);
             Assert.That(result.DestinationAddresses, Is.EqualTo(new[] { "Alter Sirksfelder Weg 10, 23881 Koberg, Germany" }));
             Assert.That(result.OriginAddresses, Is.EqualTo(new[] { "St2154 18, 92726 Waidhaus, Germany" }));
             Assert.That(result.Rows.First().Elements.First().Status, Is.EqualTo(DistanceMatrixElementStatusCodes.OK));
@@ -48,7 +49,7 @@
             var result = await GoogleMaps.DistanceMatrix.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(DistanceMatrixStatusCodes.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.DestinationAddresses, Is.EqualTo(new[] { "Alter Sirksfelder Weg 10, 23881 Koberg, Germany" }));
             Assert.That(result.OriginAddresses, Is.EqualTo(new[] { "St2154 18, 92726 Waidhaus, Germany", "Böhmerwaldstraße 19, 93444 Bad Kötzting, Germany" }));
             Assert.That(result.Rows.Count(), Is.EqualTo(2));
@@ -70,7 +71,7 @@
             var result = await GoogleMaps.DistanceMatrix.QueryAsync(request);
 
             AssertInconclusive.NotExceedQuota(result);
-            Assert.That(result.Status, Is.EqualTo(DistanceMatrixStatusCodes.OK));
+            Assert.That(result.Status, Is.EqualTo(StatusCodes.OK));
             Assert.That(result.Rows.First().Elements.First().DurationInTraffic, Is.Not.Null);
         }
 
@@ -209,7 +210,7 @@
                 AssertInconclusive.NotExceedQuota(result);
                 Assert.That(rewrittenUri, Is.Not.Null, "OnUriCreated was not invoked");
                 Assert.That(rewrittenUri.ToString(), Does.Not.Contain("placeholder"));
-                Assert.That(result.Status, Is.EqualTo(DistanceMatrixStatusCodes.OK), result.ErrorMessage);
+                Assert.That(result.Status, Is.EqualTo(StatusCodes.OK), result.ErrorMessage);
             }
             finally
             {
@@ -237,7 +238,7 @@
                 var result = await GoogleMaps.DistanceMatrix.QueryAsync(request);
 
                 AssertInconclusive.NotExceedQuota(result);
-                Assert.That(result.Status, Is.EqualTo(DistanceMatrixStatusCodes.OK), result.ErrorMessage);
+                Assert.That(result.Status, Is.EqualTo(StatusCodes.OK), result.ErrorMessage);
                 Assert.That(rawData, Is.Not.Empty);
             }
             finally

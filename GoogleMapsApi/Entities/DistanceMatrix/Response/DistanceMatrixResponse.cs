@@ -15,8 +15,8 @@
         /// "status" contains metadata on the request. See Status Codes below.
         /// </summary>
         [JsonPropertyName("status")]
-        [JsonConverter(typeof(EnumMemberJsonConverter<DistanceMatrixStatusCodes>))]
-        public DistanceMatrixStatusCodes Status { get; set; }
+        [JsonConverter(typeof(EnumMemberJsonConverter<StatusCodes>))]
+        public StatusCodes Status { get; set; }
 
         [JsonPropertyName("rows")]
         public IEnumerable<Row> Rows { get; set; } = null!;

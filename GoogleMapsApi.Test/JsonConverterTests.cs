@@ -32,7 +32,7 @@ namespace GoogleMapsApi.Test
         {
             var json = """{"value": 3600, "text": "1 hour"}""";
             
-            var duration = JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(json, _options);
+            var duration = JsonSerializer.Deserialize<Entities.Common.Duration>(json, _options);
             
             Assert.That(duration, Is.Not.Null);
             Assert.That(duration.Value, Is.EqualTo(TimeSpan.FromHours(1)));
@@ -71,7 +71,7 @@ namespace GoogleMapsApi.Test
         {
             var json = "null";
             
-            var duration = JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(json, _options);
+            var duration = JsonSerializer.Deserialize<Entities.Common.Duration>(json, _options);
             
             Assert.That(duration, Is.Null);
         }
@@ -82,7 +82,7 @@ namespace GoogleMapsApi.Test
             var json = "\"invalid_format\"";
             
             Assert.Throws<JsonException>(() => 
-                JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(json, _options));
+                JsonSerializer.Deserialize<Entities.Common.Duration>(json, _options));
         }
 
         #endregion

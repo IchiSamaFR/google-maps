@@ -1,4 +1,5 @@
 using GoogleMapsApi.Engine.JsonConverters;
+using GoogleMapsApi.Entities.Common;
 using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Directions.Response

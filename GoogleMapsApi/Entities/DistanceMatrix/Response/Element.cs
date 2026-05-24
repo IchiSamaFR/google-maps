@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
-
-using GoogleMapsApi.Entities.Directions.Response;
 using GoogleMapsApi.Engine.JsonConverters;
+using GoogleMapsApi.Entities.Common;
 
 namespace GoogleMapsApi.Entities.DistanceMatrix.Response
 {

@@ -174,7 +174,7 @@ namespace GoogleMapsApi.Test
 
             Assert.DoesNotThrow(() =>
             {
-                var duration = JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(largeNumbersJson, _options);
+                var duration = JsonSerializer.Deserialize<Entities.Common.Duration>(largeNumbersJson, _options);
                 Assert.That(duration, Is.Not.Null);
                 Assert.That(duration.Value, Is.EqualTo(TimeSpan.FromSeconds(2147483647)));
             });
@@ -192,7 +192,7 @@ namespace GoogleMapsApi.Test
             {
                 try
                 {
-                    var duration = JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(beyondInt32Json, _options);
+                    var duration = JsonSerializer.Deserialize<Entities.Common.Duration>(beyondInt32Json, _options);
                 }
                 catch (JsonException)
                 {
@@ -502,7 +502,7 @@ namespace GoogleMapsApi.Test
                 
                 Assert.DoesNotThrow(() =>
                 {
-                    var duration = JsonSerializer.Deserialize<GoogleMapsApi.Entities.Directions.Response.Duration>(json, _options);
+                    var duration = JsonSerializer.Deserialize<Entities.Common.Duration>(json, _options);
                     Assert.That(duration, Is.Not.Null);
                     Assert.That(duration.Value, Is.EqualTo(expectedTimeSpan));
                 }, $"Duration conversion failed for {seconds} seconds");

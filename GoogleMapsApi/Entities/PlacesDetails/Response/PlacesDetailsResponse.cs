@@ -13,8 +13,8 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Response
         /// "status" contains metadata on the request.
         /// </summary>
         [JsonPropertyName("status")]
-        [JsonConverter(typeof(EnumMemberJsonConverter<Status>))]
-        public Status Status { get; set; }
+        [JsonConverter(typeof(EnumMemberJsonConverter<StatusCodes>))]
+        public StatusCodes Status { get; set; }
 
 
 

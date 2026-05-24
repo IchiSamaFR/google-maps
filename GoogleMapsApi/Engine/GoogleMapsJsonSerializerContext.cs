@@ -1,4 +1,5 @@
 ﻿#if NET5_0_OR_GREATER
+using GoogleMapsApi.Entities.Common;
 using GoogleMapsApi.Entities.Directions.Response;
 using GoogleMapsApi.Entities.DistanceMatrix.Response;
 using GoogleMapsApi.Entities.Elevation.Response;
@@ -34,31 +35,13 @@ namespace GoogleMapsApi.Engine
     [JsonSerializable(typeof(GoogleMapsApi.Entities.PlacesNearBy.Response.Result), TypeInfoPropertyName = "PlacesNearByResult")]
     [JsonSerializable(typeof(GoogleMapsApi.Entities.PlacesText.Response.Result), TypeInfoPropertyName = "PlacesTextResult")]
 
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.Elevation.Response.Status), TypeInfoPropertyName = "ElevationStatus")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.Geocoding.Response.Status), TypeInfoPropertyName = "GeocodingStatus")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.PlaceAutocomplete.Response.Status), TypeInfoPropertyName = "PlaceAutocompleteStatus")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.Places.Response.Status), TypeInfoPropertyName = "PlacesStatus")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.PlacesDetails.Response.Status), TypeInfoPropertyName = "PlacesDetailsStatus")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.PlacesFind.Response.Status), TypeInfoPropertyName = "PlacesFindStatus")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.PlacesNearBy.Response.Status), TypeInfoPropertyName = "PlacesNearByStatus")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.PlacesText.Response.Status), TypeInfoPropertyName = "PlacesTextStatus")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.TimeZone.Response.Status), TypeInfoPropertyName = "TimeZoneStatus")]
+    [JsonSerializable(typeof(GoogleMapsApi.Entities.Common.Geometry), TypeInfoPropertyName = "Geometry")]
 
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.Geocoding.Response.Geometry), TypeInfoPropertyName = "GeocodingGeometry")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.Places.Response.Geometry), TypeInfoPropertyName = "PlacesGeometry")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.PlacesDetails.Response.Geometry), TypeInfoPropertyName = "PlacesDetailsGeometry")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.PlacesFind.Response.Geometry), TypeInfoPropertyName = "PlacesFindGeometry")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.PlacesNearBy.Response.Geometry), TypeInfoPropertyName = "PlacesNearByGeometry")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.PlacesText.Response.Geometry), TypeInfoPropertyName = "PlacesTextGeometry")]
+    [JsonSerializable(typeof(GoogleMapsApi.Entities.Common.OpeningHours), TypeInfoPropertyName = "OpeningHours")]
 
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.PlacesDetails.Response.OpeningHours), TypeInfoPropertyName = "PlacesDetailsOpeningHours")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.PlacesFind.Response.OpeningHours), TypeInfoPropertyName = "PlacesFindOpeningHours")]
+    [JsonSerializable(typeof(GoogleMapsApi.Entities.Common.Distance), TypeInfoPropertyName = "Distance")]
 
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.Directions.Response.Distance), TypeInfoPropertyName = "DirectionsDistance")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.DistanceMatrix.Response.Distance), TypeInfoPropertyName = "DistanceMatrixDistance")]
-
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.Directions.Response.Duration), TypeInfoPropertyName = "DirectionsDuration")]
-    [JsonSerializable(typeof(GoogleMapsApi.Entities.DistanceMatrix.Response.Duration), TypeInfoPropertyName = "DistanceMatrixDuration")]
+    [JsonSerializable(typeof(GoogleMapsApi.Entities.Common.Duration), TypeInfoPropertyName = "Duration")]
 
     [JsonSerializable(typeof(IEnumerable<GoogleMapsApi.Entities.Elevation.Response.Result>), TypeInfoPropertyName = "IEnumerableElevationResult")]
     [JsonSerializable(typeof(IEnumerable<GoogleMapsApi.Entities.Geocoding.Response.Result>), TypeInfoPropertyName = "IEnumerableGeocodingResult")]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GoogleMapsApi.Entities.Common;
+using System;
 using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesRadar.Response

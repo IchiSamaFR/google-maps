@@ -12,8 +12,8 @@ namespace GoogleMapsApi.Entities.TimeZone.Response
         /// "status" contains metadata on the request.
         /// </summary>
         [JsonPropertyName("status")]
-        [JsonConverter(typeof(EnumMemberJsonConverter<Status>))]
-        public Status Status { get; set; }
+        [JsonConverter(typeof(EnumMemberJsonConverter<StatusCodes>))]
+        public StatusCodes Status { get; set; }
 
         /// <summary>
         /// DstOffset: the offset for daylight-savings time in seconds. This will be zero if the time zone is not in Daylight Savings Time during the specified timestamp.

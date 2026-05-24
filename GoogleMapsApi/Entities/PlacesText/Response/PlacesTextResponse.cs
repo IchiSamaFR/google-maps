@@ -13,8 +13,8 @@ namespace GoogleMapsApi.Entities.PlacesText.Response
         /// "status" contains metadata on the request.
         /// </summary>
         [JsonPropertyName("status")]
-        [JsonConverter(typeof(EnumMemberJsonConverter<Status>))]
-        public Status Status { get; set; }
+        [JsonConverter(typeof(EnumMemberJsonConverter<StatusCodes>))]
+        public StatusCodes Status { get; set; }
 
         /// <summary>
         /// "results" contains an array of places, with information about the place. See Place Search Results for information about these results. The Places API returns up to 20 establishment results. Additionally, political results may be returned which serve to identify the area of the request.
