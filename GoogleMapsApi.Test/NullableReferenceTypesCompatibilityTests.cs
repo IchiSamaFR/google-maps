@@ -14,19 +14,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using GoogleMapsApi.Engine;
+using GoogleMapsApi.Test.Utils;
 
 namespace GoogleMapsApi.Test
 {
     [TestFixture]
     public class NullableReferenceTypesCompatibilityTests
     {
-        private JsonSerializerOptions _options;
-
         [SetUp]
         public void Setup()
         {
-            // Use the exact same JSON configuration as production code
-            _options = GoogleMapsJsonSerializerContext.Default.Options;
         }
 
         #region Request Entity Null Safety Tests
@@ -157,7 +154,7 @@ namespace GoogleMapsApi.Test
 
             Assert.DoesNotThrow(() =>
             {
-                var response = JsonSerializer.Deserialize<DirectionsResponse>(minimalJson, _options);
+                var response = JsonMultitargets.Deserialize<DirectionsResponse>(minimalJson);
                 Assert.That(response, Is.Not.Null);
                 Assert.That(response.Status, Is.EqualTo(DirectionsStatusCodes.OK));
                 Assert.That(response.Routes, Is.Not.Null);
@@ -175,7 +172,7 @@ namespace GoogleMapsApi.Test
 
             Assert.DoesNotThrow(() =>
             {
-                var response = JsonSerializer.Deserialize<DirectionsResponse>(nullPropertiesJson, _options);
+                var response = JsonMultitargets.Deserialize<DirectionsResponse>(nullPropertiesJson);
                 Assert.That(response, Is.Not.Null);
                 Assert.That(response.Status, Is.EqualTo(DirectionsStatusCodes.OK));
             });
@@ -207,7 +204,7 @@ namespace GoogleMapsApi.Test
 
             Assert.DoesNotThrow(() =>
             {
-                var response = JsonSerializer.Deserialize<GeocodingResponse>(partialResultJson, _options);
+                var response = JsonMultitargets.Deserialize<GeocodingResponse>(partialResultJson);
                 Assert.That(response, Is.Not.Null);
                 Assert.That(response.Results, Is.Not.Null);
                 Assert.That(response.Results.Count(), Is.EqualTo(1));
@@ -236,7 +233,7 @@ namespace GoogleMapsApi.Test
 
             Assert.DoesNotThrow(() =>
             {
-                var response = JsonSerializer.Deserialize<PlacesDetailsResponse>(minimalPlaceJson, _options);
+                var response = JsonMultitargets.Deserialize<PlacesDetailsResponse>(minimalPlaceJson);
                 Assert.That(response, Is.Not.Null);
                 Assert.That(response.Status, Is.EqualTo(GoogleMapsApi.Entities.PlacesDetails.Response.Status.OK));
                 Assert.That(response.Result, Is.Not.Null);
@@ -285,7 +282,7 @@ namespace GoogleMapsApi.Test
 
             Assert.DoesNotThrow(() =>
             {
-                var response = JsonSerializer.Deserialize<DistanceMatrixResponse>(partialResultsJson, _options);
+                var response = JsonMultitargets.Deserialize<DistanceMatrixResponse>(partialResultsJson);
                 Assert.That(response, Is.Not.Null);
                 Assert.That(response.Rows, Is.Not.Null);
                 Assert.That(response.Rows.Count(), Is.EqualTo(1));
@@ -390,7 +387,7 @@ namespace GoogleMapsApi.Test
 
             Assert.DoesNotThrow(() =>
             {
-                var photo = JsonSerializer.Deserialize<Photo>(photoJson, _options);
+                var photo = JsonMultitargets.Deserialize<Photo>(photoJson);
                 Assert.That(photo, Is.Not.Null);
                 Assert.That(photo.Width, Is.EqualTo(100));
                 Assert.That(photo.Height, Is.EqualTo(100));

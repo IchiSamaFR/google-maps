@@ -1,13 +1,14 @@
-using GoogleMapsApi.Entities.Common;
 using GoogleMapsApi.Engine.JsonConverters;
+using GoogleMapsApi.Entities.Common;
 using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Text;
 
 namespace GoogleMapsApi.Engine
 {
@@ -58,8 +59,10 @@ namespace GoogleMapsApi.Engine
 
 			onRawResponseReceived?.Invoke(Encoding.UTF8.GetBytes(responseContent));
 
-			return JsonSerializer.Deserialize<TResponse>(responseContent, jsonOptions)!;
-		}
+            var typeResolver = (JsonTypeInfo<TResponse>)GoogleMapsJsonSerializerContext.Default.GetTypeInfo(typeof(TResponse))!;
+            var result = JsonSerializer.Deserialize(responseContent, typeResolver);
+            return result!;
+        }
 
 		private static async Task<string> GetHttpResponseAsync(HttpClient httpClient, Uri uri, HttpContent? body, TimeSpan timeout, CancellationToken cancellationToken)
 		{

@@ -18,7 +18,7 @@ namespace GoogleMapsApi.Test.Utils
         {
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json");
             if (!File.Exists(path)) return null;
-            return JsonSerializer.Deserialize<AppSettings>(File.ReadAllText(path));
+            return JsonMultitargets.Deserialize<AppSettings>(File.ReadAllText(path));
         }
     }
 }

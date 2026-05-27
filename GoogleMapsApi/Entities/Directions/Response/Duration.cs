@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using System;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
@@ -10,6 +11,7 @@ namespace GoogleMapsApi.Entities.Directions.Response
 	/// </summary>
 	[DataContract(Name = "duration")]
 	[JsonSerializable(typeof(Duration))]
+	[JsonConverter(typeof(DurationJsonConverter<Duration>))]
 	public class Duration
 	{
 		[DataMember(Name = "value")]
