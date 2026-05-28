@@ -1,6 +1,7 @@
 using System.Text.Json;
 using GoogleMapsApi.Engine;
 using GoogleMapsApi.Entities.PlacesDetails.Response;
+using GoogleMapsApi.Test.Utils;
 using NUnit.Framework;
 
 namespace GoogleMapsApi.Test
@@ -35,8 +36,7 @@ namespace GoogleMapsApi.Test
 
         private static PlacesDetailsResponse DeserializeSydneyDetails()
         {
-            var options = JsonSerializerConfiguration.CreateOptions();
-            var response = JsonSerializer.Deserialize<PlacesDetailsResponse>(GoogleSydneyDetailsJson, options);
+            var response = JsonMultitargets.Deserialize<PlacesDetailsResponse>(GoogleSydneyDetailsJson);
             Assert.That(response, Is.Not.Null);
             Assert.That(response!.Status, Is.EqualTo(Status.OK));
             Assert.That(response.Result.AddressComponent, Is.Not.Null.And.Not.Empty);

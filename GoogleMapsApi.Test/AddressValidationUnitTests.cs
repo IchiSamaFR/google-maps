@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using GoogleMapsApi.Engine;
 using GoogleMapsApi.Entities.AddressValidation.Request;
 using GoogleMapsApi.Entities.AddressValidation.Response;
+using GoogleMapsApi.Test.Utils;
 using NUnit.Framework;
 
 namespace GoogleMapsApi.Test
@@ -115,8 +116,7 @@ namespace GoogleMapsApi.Test
                        "{\"componentType\":\"postal_code\",\"confirmationLevel\":\"UNCONFIRMED_AND_SUSPICIOUS\"}" +
                        "]}}}";
 
-            var options = JsonSerializerConfiguration.CreateOptions();
-            var response = JsonSerializer.Deserialize<AddressValidationResponse>(json, options);
+            var response = JsonMultitargets.Deserialize<AddressValidationResponse>(json);
 
             Assert.That(response, Is.Not.Null);
             Assert.That(response!.Result!.Verdict!.InputGranularity, Is.EqualTo(Granularity.SubPremise));
