@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.300" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.300" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net481' OR '$(TargetFramework)' == 'net462'">
@@ -57,5 +57,33 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'net481' OR '$(TargetFramework)' == 'net462' OR '$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="System.Text.Encodings.Web" Version="10.0.8" />
     <PackageReference Include="System.Text.Json" Version="10.0.8" />  
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Engine\GoogleMapsJsonSerializerContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GoogleMapsJsonSerializerContext.cs</LastGenOutput>
+    </None>
+    <None Update="Engine\JsonConverters\EnumMemberJsonConverterFactory.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EnumMemberJsonConverterFactory.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Engine\GoogleMapsJsonSerializerContext.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GoogleMapsJsonSerializerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Engine\JsonConverters\EnumMemberJsonConverterFactory.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EnumMemberJsonConverterFactory.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
