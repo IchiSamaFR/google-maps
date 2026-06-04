@@ -8,6 +8,7 @@ namespace GoogleMapsApi.Entities.Directions.Response
 	/// <summary>
 	/// Each element in the legs array specifies a single leg of the journey from the origin to the destination in the calculated route. For routes that contain no waypoints, the route will consist of a single "leg," but for routes that define one or more waypoints, the route will consist of one or more legs, corresponding to the specific legs of the journey.
 	/// </summary>
+	[JsonSerializable(typeof(Leg))]
 	public class Leg
 	{
 		/// <summary>

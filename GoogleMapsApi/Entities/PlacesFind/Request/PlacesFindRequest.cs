@@ -1,12 +1,14 @@
 ﻿using GoogleMapsApi.Entities.Common;
 using System;
 using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesFind.Request
 {
     /// <summary>
     /// A Find Place request takes a text input, and returns a place. The text input can be any kind of Places data, for example, a name, address, or phone number.
     /// </summary>
+    [JsonSerializable(typeof(PlacesFindRequest))]
     public class PlacesFindRequest : MapsBaseRequest
     {
         protected internal override string BaseUrl

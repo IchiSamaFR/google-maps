@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Geocoding.Request
 {
+    [JsonSerializable(typeof(GeocodingComponents))]
     public class GeocodingComponents
     {
         private readonly Dictionary<string, string> components = new Dictionary<string, string>();

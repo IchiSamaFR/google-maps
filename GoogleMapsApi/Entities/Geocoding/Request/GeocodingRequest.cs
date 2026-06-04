@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoogleMapsApi.Entities.Common;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Geocoding.Request
 {
@@ -9,6 +10,7 @@ namespace GoogleMapsApi.Entities.Geocoding.Request
     /// Request for the Google Geocoding API, which converts between addresses and geographic coordinates.
     /// Supports forward geocoding (address to coordinates) and reverse geocoding (coordinates to address).
     /// </summary>
+    [JsonSerializable(typeof(GeocodingRequest))]
     public class GeocodingRequest : SignableRequest
     {
         protected internal override string BaseUrl

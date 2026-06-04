@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using GoogleMapsApi.Entities.Common;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesText.Request
 {
@@ -8,6 +9,7 @@ namespace GoogleMapsApi.Entities.PlacesText.Request
     /// Request for the Google Places Text Search API, which returns places matching a free-form text query,
     /// optionally biased by location and radius.
     /// </summary>
+    [JsonSerializable(typeof(PlacesTextRequest))]
     public class PlacesTextRequest : MapsBaseRequest
     {
         protected internal override string BaseUrl

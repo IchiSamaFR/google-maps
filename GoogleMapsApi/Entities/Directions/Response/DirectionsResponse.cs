@@ -11,6 +11,7 @@ namespace GoogleMapsApi.Entities.Directions.Response
 	/// <summary>
 	/// Response from the Google Directions API containing one or more computed routes from origin to destination.
 	/// </summary>
+	[JsonSerializable(typeof(DirectionsResponse))]
 	public class DirectionsResponse : IResponseFor<DirectionsRequest>
 	{
 		/// <summary>

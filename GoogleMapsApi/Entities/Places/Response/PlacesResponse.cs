@@ -10,6 +10,7 @@ namespace GoogleMapsApi.Entities.Places.Response
 	/// <summary>
 	/// Response from the Google Places Search API containing places matching the search criteria.
 	/// </summary>
+	[JsonSerializable(typeof(PlacesResponse))]
 	public class PlacesResponse : IResponseFor<PlacesRequest>
 	{
 		/// <summary>

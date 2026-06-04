@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using GoogleMapsApi.Entities.Common;
@@ -8,6 +8,7 @@ namespace GoogleMapsApi.Entities.Directions.Response
 	/// <summary>
 	/// Contains the encoded and decoded data returned in the overview_polyline field.
 	/// </summary>
+	[JsonSerializable(typeof(OverviewPolyline))]
 	public class OverviewPolyline
 	{
 		/// <summary>

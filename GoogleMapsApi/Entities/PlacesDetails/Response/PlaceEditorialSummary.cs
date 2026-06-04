@@ -1,10 +1,11 @@
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesDetails.Response
 {
     /// <summary>
     /// Contains a summary of the place.
     /// </summary>
+    [JsonSerializable(typeof(PlaceEditorialSummary))]
     public class PlaceEditorialSummary
     {
         /// <summary>

@@ -6,6 +6,7 @@ using GoogleMapsApi.Engine.JsonConverters;
 
 namespace GoogleMapsApi.Entities.DistanceMatrix.Response
 {
+    [JsonSerializable(typeof(Element))]
     public class Element
     {
         /// <summary>

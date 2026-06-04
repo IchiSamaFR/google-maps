@@ -1,5 +1,6 @@
 ﻿using System;
 using GoogleMapsApi.Entities.Common;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesDetails.Request
 {
@@ -7,6 +8,7 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Request
     /// Request for the Google Place Details API, which returns rich information about a single place
     /// identified by its Place ID.
     /// </summary>
+    [JsonSerializable(typeof(PlacesDetailsRequest))]
     public class PlacesDetailsRequest : MapsBaseRequest
     {
         protected internal override string BaseUrl

@@ -1,9 +1,10 @@
-using System;
+﻿using System;
 using System.Text.Json.Serialization;
 using GoogleMapsApi.Engine.JsonConverters;
 
 namespace GoogleMapsApi.Entities.Directions.Response
 {
+	[JsonSerializable(typeof(Vehicle))]
 	public class Vehicle
     {
         /// <summary>

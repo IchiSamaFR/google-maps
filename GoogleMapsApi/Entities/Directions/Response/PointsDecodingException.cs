@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Directions.Response
 {
-	public class PointsDecodingException : Exception
+    [JsonSerializable(typeof(PointsDecodingException))]
+    public class PointsDecodingException : Exception
 	{
 		public string? EncodedString { get; set; }
 

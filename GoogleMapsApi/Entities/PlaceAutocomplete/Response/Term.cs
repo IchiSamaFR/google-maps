@@ -6,6 +6,7 @@ namespace GoogleMapsApi.Entities.PlaceAutocomplete.Response
     /// <summary>
     /// Identifies a section of description in a PlaceAutocomplete search result
     /// </summary>
+    [JsonSerializable(typeof(Term))]
     public class Term
     {
         /// <summary>

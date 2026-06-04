@@ -1,5 +1,6 @@
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using GoogleMapsApi.Entities.Common;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Directions.Response
 {
@@ -7,6 +8,7 @@ namespace GoogleMapsApi.Entities.Directions.Response
 	/// Contains information about the stop/station for this part of the trip
 	/// </summary>
 	[DataContract(Name = "stop")]
+	[JsonSerializable(typeof(Stop))]
 	public class Stop
 	{
 		/// <summary>

@@ -10,6 +10,7 @@ namespace GoogleMapsApi.Entities.PlacesNearBy.Response
 	/// <summary>
 	/// Response from the Google Places Nearby Search API containing places near the requested location.
 	/// </summary>
+	[JsonSerializable(typeof(PlacesNearByResponse))]
 	public class PlacesNearByResponse : IResponseFor<PlacesNearByRequest>
 	{
 		/// <summary>

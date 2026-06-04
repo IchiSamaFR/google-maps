@@ -9,11 +9,13 @@
     using System.Linq;
 
     using GoogleMapsApi.Engine;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     /// Request for the Google Distance Matrix API, which returns travel distance and duration
     /// for a matrix of origins and destinations across a chosen travel mode.
     /// </summary>
+    [JsonSerializable(typeof(DistanceMatrixRequest))]
     public class DistanceMatrixRequest : SignableRequest
     {
         protected internal override string BaseUrl

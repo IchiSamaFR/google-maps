@@ -6,6 +6,7 @@ namespace GoogleMapsApi.Entities.Common
     /// <summary>
     /// Place Photo.
     /// </summary>
+    [JsonSerializable(typeof(Photo))]
     public class Photo
     {
         /// <summary>

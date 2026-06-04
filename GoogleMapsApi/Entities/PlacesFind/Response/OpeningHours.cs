@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GoogleMapsApi.Entities.PlacesFind.Response
 {
+    [JsonSerializable(typeof(OpeningHours))]
     public class OpeningHours
     {
         /// <summary>

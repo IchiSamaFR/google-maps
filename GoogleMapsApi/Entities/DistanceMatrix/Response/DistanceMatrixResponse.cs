@@ -12,6 +12,7 @@
     /// <summary>
     /// Response from the Google Distance Matrix API containing travel distance and duration between each origin and destination.
     /// </summary>
+    [JsonSerializable(typeof(DistanceMatrixResponse))]
     public class DistanceMatrixResponse: IResponseFor<DistanceMatrixRequest>
     {
         /// <summary>

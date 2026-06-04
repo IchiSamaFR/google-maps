@@ -8,6 +8,7 @@ using GoogleMapsApi.Engine.JsonConverters;
 namespace GoogleMapsApi.Entities.PlacesRadar.Response
 {
     [Obsolete("Radar search is deprecated since June 30 2018", true)]
+	[JsonSerializable(typeof(PlacesRadarResponse))]
 	public class PlacesRadarResponse : IResponseFor<PlacesRadarRequest>
 	{
 		/// <summary>

@@ -6,6 +6,7 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Response
     /// <summary>
     /// Contains the location
     /// </summary>
+    [JsonSerializable(typeof(Geometry))]
     public class Geometry
     {
         [JsonPropertyName("location")]

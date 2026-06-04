@@ -1,9 +1,11 @@
 ﻿using System.Runtime.Serialization;
 using GoogleMapsApi.Entities.Common;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Geocoding.Response
 {
 	[DataContract]
+	[JsonSerializable(typeof(FramedLocation))]
 	public class FramedLocation
 	{
 		[DataMember(Name = "southwest")]

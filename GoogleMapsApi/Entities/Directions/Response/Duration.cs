@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Directions.Response
 {
@@ -8,6 +9,7 @@ namespace GoogleMapsApi.Entities.Directions.Response
 	/// These fields may be absent if the duration is unknown.
 	/// </summary>
 	[DataContract(Name = "duration")]
+	[JsonSerializable(typeof(Duration))]
 	public class Duration
 	{
 		[DataMember(Name = "value")]

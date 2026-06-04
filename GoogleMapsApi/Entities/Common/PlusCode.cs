@@ -1,4 +1,4 @@
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Common
 {
@@ -8,6 +8,7 @@ namespace GoogleMapsApi.Entities.Common
     /// Plus codes can be used as a replacement for street addresses in places where they do not exist
     /// (where buildings are not numbered or streets are not named).
     /// </summary>
+    [JsonSerializable(typeof(PlusCode))]
     public class PlusCode
     {
         /// <summary>

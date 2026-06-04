@@ -1,4 +1,4 @@
-using GoogleMapsApi.Entities.Common;
+﻿using GoogleMapsApi.Entities.Common;
 using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesRadar.Response
@@ -6,6 +6,7 @@ namespace GoogleMapsApi.Entities.PlacesRadar.Response
     /// <summary>
     /// Contains the location
     /// </summary>
+    [JsonSerializable(typeof(Geometry))]
     public class Geometry
     {
         [JsonPropertyName("location")]

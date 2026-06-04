@@ -10,6 +10,7 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Response
     /// <summary>
     /// Response from the Google Place Details API containing the full record for the requested place.
     /// </summary>
+    [JsonSerializable(typeof(PlacesDetailsResponse))]
     public class PlacesDetailsResponse : IResponseFor<PlacesDetailsRequest>
     {
         /// <summary>

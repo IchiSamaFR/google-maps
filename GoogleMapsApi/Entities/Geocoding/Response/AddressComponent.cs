@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Geocoding.Response
 {
+	[JsonSerializable(typeof(AddressComponent))]
 	public class AddressComponent
 	{
 		/// <summary>

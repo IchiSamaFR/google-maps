@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesDetails.Response
 {
     [DataContract]
+    [JsonSerializable(typeof(Review))]
     public class Review
     {
         /// <summary>

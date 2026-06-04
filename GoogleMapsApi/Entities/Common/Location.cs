@@ -1,8 +1,9 @@
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Common
 {
+	[JsonSerializable(typeof(Location))]
 	public class Location : ILocationString
 	{
 		[JsonPropertyName("lat")]

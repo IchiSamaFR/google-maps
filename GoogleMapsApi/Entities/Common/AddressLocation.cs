@@ -1,8 +1,10 @@
-using System;
+﻿using System;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Common
 {
-	public class AddressLocation : ILocationString
+    [JsonSerializable(typeof(Location))]
+    public class AddressLocation : ILocationString
 	{
 		public string Address { get; private set; }
 

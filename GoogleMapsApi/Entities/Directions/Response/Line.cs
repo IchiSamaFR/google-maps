@@ -1,8 +1,9 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Directions.Response
 {
+	[JsonSerializable(typeof(Line))]
 	public class Line
 	{
 		/// <summary>

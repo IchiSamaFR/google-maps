@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesRadar.Response
 {
+	[JsonSerializable(typeof(Result))]
 	public class Result
 	{
 		[JsonPropertyName("id")]

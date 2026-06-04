@@ -1,6 +1,7 @@
 ﻿using GoogleMapsApi.Entities.Common;
 using System;
 using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlaceAutocomplete.Request
 {
@@ -9,6 +10,7 @@ namespace GoogleMapsApi.Entities.PlaceAutocomplete.Request
     /// a textual search string and optional geographic bounds. The service can be used to provide autocomplete functionality for text-based 
     /// geographic searches, by returning places such as businesses, addresses and points of interest as a user types.
     /// </summary>
+    [JsonSerializable(typeof(PlaceAutocompleteRequest))]
     public class PlaceAutocompleteRequest : MapsBaseRequest
 	{
 		protected internal override string BaseUrl

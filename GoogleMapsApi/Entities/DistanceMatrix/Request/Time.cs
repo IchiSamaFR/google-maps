@@ -5,7 +5,9 @@ namespace GoogleMapsApi.Entities.DistanceMatrix.Request
     using System.Globalization;
 
     using GoogleMapsApi.Engine;
+    using System.Text.Json.Serialization;
 
+    [JsonSerializable(typeof(Time))]
     public class Time
     {
         public DateTime Value { get; set; }

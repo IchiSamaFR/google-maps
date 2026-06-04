@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesDetails.Response
 {
+    [JsonSerializable(typeof(OpeningHours))]
     public class OpeningHours
     {
         /// <summary>

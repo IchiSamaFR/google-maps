@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GoogleMapsApi.Entities.PlacesFind.Response
 {
+    [JsonSerializable(typeof(Candidate))]
     public class Candidate
     {
         // basic fields

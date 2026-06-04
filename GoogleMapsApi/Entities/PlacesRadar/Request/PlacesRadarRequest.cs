@@ -1,6 +1,7 @@
 ﻿using GoogleMapsApi.Entities.Common;
 using System;
 using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesRadar.Request
 {
@@ -9,6 +10,7 @@ namespace GoogleMapsApi.Entities.PlacesRadar.Request
     /// https://cloud.google.com/blog/products/maps-platform/announcing-deprecation-of-place-add
     /// </summary>
     [Obsolete("Radar search is deprecated since June 30 2018", true)]
+    [JsonSerializable(typeof(PlacesRadarRequest))]
     public class PlacesRadarRequest : MapsBaseRequest
 	{
 		protected internal override string BaseUrl

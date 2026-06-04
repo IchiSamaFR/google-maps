@@ -1,8 +1,9 @@
-using GoogleMapsApi.Engine.JsonConverters;
+﻿using GoogleMapsApi.Engine.JsonConverters;
 using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Directions.Response
 {
+	[JsonSerializable(typeof(TransitDetails))]
 	public class TransitDetails
 	{
 		/// <summary>

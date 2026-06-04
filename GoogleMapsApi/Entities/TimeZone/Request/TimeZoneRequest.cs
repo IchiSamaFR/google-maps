@@ -1,6 +1,7 @@
 ﻿using System;
 using GoogleMapsApi.Engine;
 using GoogleMapsApi.Entities.Common;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.TimeZone.Request
 {
@@ -8,6 +9,7 @@ namespace GoogleMapsApi.Entities.TimeZone.Request
     /// Request for the Google Time Zone API, which returns the time-zone identifier and UTC offset
     /// (including any DST offset) for a given location and timestamp.
     /// </summary>
+    [JsonSerializable(typeof(TimeZoneRequest))]
     public class TimeZoneRequest : SignableRequest
     {
         protected internal override string BaseUrl

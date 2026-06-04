@@ -10,6 +10,7 @@ namespace GoogleMapsApi.Entities.PlacesFind.Response
     /// <summary>
     /// Response from the Google Find Place API containing candidate places matching the input text.
     /// </summary>
+    [JsonSerializable(typeof(PlacesFindResponse))]
     public class PlacesFindResponse : IResponseFor<PlacesFindRequest>
     {
         [JsonPropertyName("status")]

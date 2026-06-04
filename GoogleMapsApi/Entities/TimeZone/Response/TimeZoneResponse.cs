@@ -9,6 +9,7 @@ namespace GoogleMapsApi.Entities.TimeZone.Response
     /// <summary>
     /// Response from the Google Time Zone API containing the time-zone identifier, UTC offset, and DST offset for the queried location.
     /// </summary>
+    [JsonSerializable(typeof(TimeZoneResponse))]
     public class TimeZoneResponse : IResponseFor<TimeZoneRequest>
     {
         /// <summary>

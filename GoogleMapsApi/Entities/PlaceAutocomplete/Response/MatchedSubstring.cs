@@ -6,6 +6,7 @@ namespace GoogleMapsApi.Entities.PlaceAutocomplete.Response
     /// <summary>
     /// Describes the location of the entered term in the PlaceAutocomplete result text, so that the term can be highlighted if desired
     /// </summary>
+    [JsonSerializable(typeof(MatchedSubstring))]
     public class MatchedSubstring
     {
         /// <summary>

@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesNearBy.Response
 {
+	[JsonSerializable(typeof(Result))]
 	public class Result
 	{
 		/// <summary>

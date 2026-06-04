@@ -3,6 +3,7 @@ using GoogleMapsApi.Entities.Common;
 
 namespace GoogleMapsApi.Entities.Elevation.Response
 {
+	[JsonSerializable(typeof(Result))]
 	public class Result
 	{
 		/// <summary>

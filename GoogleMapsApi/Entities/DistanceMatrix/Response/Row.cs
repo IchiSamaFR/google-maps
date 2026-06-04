@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
+    [JsonSerializable(typeof(Row))]
     public class Row
     {
         /// <summary>

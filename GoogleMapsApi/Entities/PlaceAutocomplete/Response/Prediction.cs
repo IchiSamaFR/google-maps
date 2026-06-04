@@ -8,6 +8,7 @@ namespace GoogleMapsApi.Entities.PlaceAutocomplete.Response
     /// When the PlaceAutocomplete service returns results from a search, it places them within a predictions array. 
     /// Even if the service returns no results (such as if the location is remote) it still returns an empty predictions array.
     /// </summary>
+	[JsonSerializable(typeof(Prediction))]
 	public class Prediction
 	{
         /// <summary>

@@ -5,6 +5,7 @@ using GoogleMapsApi.Entities.Common;
 
 namespace GoogleMapsApi.Entities.PlacesText.Response
 {
+    [JsonSerializable(typeof(Result))]
     public class Result
     {
         /// <summary>
