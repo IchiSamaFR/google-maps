@@ -1,5 +1,9 @@
-﻿namespace GoogleMapsApi.Entities.PlacesDetails.Response
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using System.Text.Json.Serialization;
+
+namespace GoogleMapsApi.Entities.PlacesDetails.Response
 {
+    [JsonConverter(typeof(EnumMemberJsonConverter<Status>))]
     public enum Status
     {
         /// <summary>

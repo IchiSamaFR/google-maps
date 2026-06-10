@@ -1,10 +1,13 @@
+using GoogleMapsApi.Engine.JsonConverters;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.AddressValidation.Response
 {
     /// <summary>
     /// Per-component confirmation level returned by the Address Validation API.
     /// </summary>
+    [JsonConverter(typeof(EnumMemberJsonConverter<ConfirmationLevel>))]
     public enum ConfirmationLevel
     {
         /// <summary>Default value. This value is unused.</summary>

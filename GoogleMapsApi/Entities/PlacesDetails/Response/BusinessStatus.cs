@@ -1,4 +1,6 @@
+using GoogleMapsApi.Engine.JsonConverters;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.PlacesDetails.Response
 {
@@ -6,6 +8,7 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Response
     /// Indicates the operational status of the place, if it is a business.
     /// </summary>
     [DataContract]
+    [JsonConverter(typeof(EnumMemberJsonConverter<BusinessStatus>))]
     public enum BusinessStatus
     {
         /// <summary>

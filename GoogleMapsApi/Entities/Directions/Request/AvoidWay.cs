@@ -1,9 +1,12 @@
-﻿using System;
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using System;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Directions.Request
 {
 	[Flags]
-	public enum AvoidWay
+    [JsonConverter(typeof(EnumMemberJsonConverter<AvoidWay>))]
+    public enum AvoidWay
 	{
 		Nothing = 0x0,
 		Tolls = 0x1,

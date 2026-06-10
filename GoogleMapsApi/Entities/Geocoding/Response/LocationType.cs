@@ -1,9 +1,12 @@
-﻿using System.Runtime.Serialization;
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Geocoding.Response
 {
 	[DataContract]
-	public enum GeocodeLocationType
+    [JsonConverter(typeof(EnumMemberJsonConverter<GeocodeLocationType>))]
+    public enum GeocodeLocationType
 	{
         /// <summary>
         /// Indicates that the returned result is a precise geocode for which we have location information accurate down to street address precision.

@@ -1,5 +1,9 @@
-﻿namespace GoogleMapsApi.Entities.Directions.Response
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using System.Text.Json.Serialization;
+
+namespace GoogleMapsApi.Entities.Directions.Response
 {
+	[JsonConverter(typeof(EnumMemberJsonConverter<DirectionsStatusCodes>))]
 	public enum DirectionsStatusCodes
 	{
 		OK, // indicates the response contains a valid result.

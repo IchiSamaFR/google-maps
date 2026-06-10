@@ -1,6 +1,10 @@
+using GoogleMapsApi.Engine.JsonConverters;
+using System.Text.Json.Serialization;
+
 namespace GoogleMapsApi.Entities.Directions.Response
 {
-	public enum VehicleType
+    [JsonConverter(typeof(EnumMemberJsonConverter<VehicleType>))]
+    public enum VehicleType
 	{
 		/// <summary>
 		/// All other vehicles will return this type.

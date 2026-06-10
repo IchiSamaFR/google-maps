@@ -1,8 +1,11 @@
-﻿using System.Runtime.Serialization;
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Directions.Request
 {
-	public enum TravelMode
+    [JsonConverter(typeof(EnumMemberJsonConverter<TravelMode>))]
+    public enum TravelMode
 	{
 		[EnumMember(Value = "DRIVING")]
 		Driving,

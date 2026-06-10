@@ -1,4 +1,6 @@
+using GoogleMapsApi.Engine.JsonConverters;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.AddressValidation.Response
 {
@@ -6,6 +8,7 @@ namespace GoogleMapsApi.Entities.AddressValidation.Response
     /// Granularity at which an address (or its inferred geocode) is understood. Used by both the
     /// <c>inputGranularity</c>, <c>validationGranularity</c>, and <c>geocodeGranularity</c> verdict fields.
     /// </summary>
+    [JsonConverter(typeof(EnumMemberJsonConverter<Granularity>))]
     public enum Granularity
     {
         /// <summary>Default value. The granularity is unspecified.</summary>

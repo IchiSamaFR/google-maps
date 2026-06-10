@@ -378,6 +378,7 @@ namespace GoogleMapsApi.Entities.PlacesDetails.Response
         }
     }
 
+    [JsonConverter(typeof(EnumMemberJsonConverter<PriceLevel>))]
     public enum PriceLevel
     {
         Free = 0,

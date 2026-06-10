@@ -1,13 +1,16 @@
-﻿using System;
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace GoogleMapsApi.Entities.PlacesFind.Response
 {
     [DataContract]
+    [JsonConverter(typeof(EnumMemberJsonConverter<Status>))]
     public enum Status
     {
         [EnumMember(Value = "OK")]

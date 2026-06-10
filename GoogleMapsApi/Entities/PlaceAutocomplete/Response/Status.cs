@@ -1,6 +1,10 @@
-﻿namespace GoogleMapsApi.Entities.PlaceAutocomplete.Response
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using System.Text.Json.Serialization;
+
+namespace GoogleMapsApi.Entities.PlaceAutocomplete.Response
 {
-	public enum Status
+    [JsonConverter(typeof(EnumMemberJsonConverter<Status>))]
+    public enum Status
 	{
 		OK, // indicates that no errors occurred; the place was successfully detected and at least one result was returned.
 		ZERO_RESULTS, // indicates that the search was successful but returned no results. This may occur if the search was passed a latlng in a remote location.

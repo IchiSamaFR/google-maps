@@ -1,9 +1,12 @@
 ﻿namespace GoogleMapsApi.Entities.DistanceMatrix.Response
 {
-	using System.Runtime.Serialization;
+    using GoogleMapsApi.Engine.JsonConverters;
+    using System.Runtime.Serialization;
+    using System.Text.Json.Serialization;
 
-	[DataContract]
-	public enum DistanceMatrixElementStatusCodes
+    [DataContract]
+    [JsonConverter(typeof(EnumMemberJsonConverter<DistanceMatrixElementStatusCodes>))]
+    public enum DistanceMatrixElementStatusCodes
 	{
 		[EnumMember]
 		OK,                       // indicates the response contains a valid result.

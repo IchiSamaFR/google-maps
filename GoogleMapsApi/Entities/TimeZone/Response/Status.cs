@@ -1,8 +1,11 @@
-﻿using System.Runtime.Serialization;
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.TimeZone.Response
 {
     [DataContract]
+    [JsonConverter(typeof(EnumMemberJsonConverter<Status>))]
     public enum Status
     {
         [EnumMember(Value = "OK")]

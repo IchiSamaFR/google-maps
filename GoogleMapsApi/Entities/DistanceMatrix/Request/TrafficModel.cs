@@ -1,8 +1,11 @@
 ﻿namespace GoogleMapsApi.Entities.DistanceMatrix.Request
 {
+    using GoogleMapsApi.Engine.JsonConverters;
     using System.Runtime.Serialization;
+    using System.Text.Json.Serialization;
 
     [DataContract]
+    [JsonConverter(typeof(EnumMemberJsonConverter<DistanceMatrixTrafficModels>))]
     public enum DistanceMatrixTrafficModels
     {
         // To be used for 'driving' travel mode only

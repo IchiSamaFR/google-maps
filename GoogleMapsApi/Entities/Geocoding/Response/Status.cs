@@ -1,9 +1,13 @@
-﻿namespace GoogleMapsApi.Entities.Geocoding.Response
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using System.Text.Json.Serialization;
+
+namespace GoogleMapsApi.Entities.Geocoding.Response
 {
-	/// <summary>
-	/// The "status" field within the Geocoding response object contains the status of the request, and may contain debugging information to help you track down why Geocoding is not working. The "status" field may contain the following values:
-	/// </summary>
-	public enum Status
+    /// <summary>
+    /// The "status" field within the Geocoding response object contains the status of the request, and may contain debugging information to help you track down why Geocoding is not working. The "status" field may contain the following values:
+    /// </summary>
+    [JsonConverter(typeof(EnumMemberJsonConverter<Status>))]
+    public enum Status
 	{
         /// <summary>
         /// Indicates that no errors occurred; the address was successfully parsed and at least one geocode was returned.

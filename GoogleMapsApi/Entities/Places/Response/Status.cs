@@ -1,9 +1,12 @@
-﻿using System.Runtime.Serialization;
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Places.Response
 {
 	[DataContract]
-	public enum Status
+    [JsonConverter(typeof(EnumMemberJsonConverter<Status>))]
+    public enum Status
 	{
 		[EnumMember(Value = "OK")]
 		OK, // indicates that no errors occurred; the place was successfully detected and at least one result was returned.

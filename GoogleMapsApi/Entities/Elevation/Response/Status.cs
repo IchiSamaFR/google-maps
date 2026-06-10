@@ -1,9 +1,12 @@
-﻿using System.Runtime.Serialization;
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Elevation.Response
 {
 	[DataContract]
-	public enum Status
+    [JsonConverter(typeof(EnumMemberJsonConverter<Status>))]
+    public enum Status
 	{
 		[EnumMember]
 		OK, // indicating the API request was successful

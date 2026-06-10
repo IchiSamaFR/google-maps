@@ -1,9 +1,12 @@
-﻿using System.Runtime.Serialization;
+﻿using GoogleMapsApi.Engine.JsonConverters;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace GoogleMapsApi.Entities.Common
 {
 	[DataContract]
-	public enum LocationType
+    [JsonConverter(typeof(EnumMemberJsonConverter<LocationType>))]
+    public enum LocationType
 	{
 		[EnumMember(Value = "street_address")]
 		StreetAddress,// indicates a precise street address.
